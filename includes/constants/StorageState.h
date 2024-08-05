@@ -1,0 +1,19 @@
+/*
+ * StorageStates.h
+ *
+ *  Created on: 17-Apr-2023
+ *      Author: developer
+ */
+
+#ifndef INCLUDES_MODELS_STORAGESTATES_H_
+#define INCLUDES_MODELS_STORAGESTATES_H_
+
+namespace apra
+{
+enum STORAGE_STATE
+{
+	STORAGE_INSERTED, STORAGE_MOUNTED, STORAGE_UNSAFE_EJECT, STORAGE_SAFE_EJECT
+};
+}
+
+#endif /* INCLUDES_MODELS_STORAGESTATES_H_ */

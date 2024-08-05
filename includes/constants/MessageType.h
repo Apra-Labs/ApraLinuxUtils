@@ -1,0 +1,16 @@
+/*
+ * MessageType.h
+ *
+ *  Created on: Jun 17, 2024
+ *      Author: developer
+ */
+
+#ifndef INCLUDES_CONSTANTS_MESSAGETYPE_H_
+#define INCLUDES_CONSTANTS_MESSAGETYPE_H_
+
+enum MESSAGE_TYPE
+{
+	NO_TYPE, REQUEST_ONLY, REQUEST_RESPONSE
+};
+
+#endif /* INCLUDES_CONSTANTS_MESSAGETYPE_H_ */
