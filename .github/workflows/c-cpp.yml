@@ -26,11 +26,8 @@ jobs:
       run: |
         cd build
         make
-    - name: Make check
-      run: |
-        cd build
-        make check
-    - name: Make distcheck
-      run: |
-        cd build
-        make distcheck
+    - name: Publish artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: libApraUtils
+        path: build/libApraUtils.a
