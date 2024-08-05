@@ -12,8 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install CMake
-      run: sudo apt-get update && sudo apt-get install -y cmake
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake libudev-dev
     - name: Create build directory
       run: mkdir -p build
     - name: Configure
