@@ -8,16 +8,27 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: Install CMake
+      run: sudo apt-get update && sudo apt-get install -y cmake
+    - name: Create build directory
+      run: mkdir -p build
+    - name: Configure
+      run: |
+        cd build
+        cmake ..
+    - name: Build
+      run: |
+        cd build
+        make
+    - name: Make check
+      run: |
+        cd build
+        make check
+    - name: Make distcheck
+      run: |
+        cd build
+        make distcheck
