@@ -32,7 +32,6 @@ public:
 protected:
 	virtual void processEvents();
 	virtual void processSingleEvent();
-	void processEvent();
 	void processMessage(I2C_Transaction_Message *txMessage);
 	void processI2CTransaction(I2C_Transaction_Message *txMessage);
 

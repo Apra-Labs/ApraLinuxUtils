@@ -45,41 +45,41 @@ void I2C_Message::configureWrite(uint64_t registerNumber, uint64_t data,
 	m_type = I2C_WRITE;
 }
 void I2C_Message::configureRead(vector<uint8_t> registerNumber,
-		uint64_t dataSize)
+		uint64_t expectedDataSize)
 {
 	m_registerNumber = registerNumber;
 	m_registerSize = registerNumber.size();
-	m_dataSize = dataSize;
+	m_dataSize = expectedDataSize;
 	m_type = I2C_READ;
 }
 void I2C_Message::configureRead(uint64_t registerNumber, uint64_t registerSize,
-		uint64_t dataSize)
+		uint64_t expectedDataSize)
 {
 	m_registerNumber = Utils::extractBytes(registerNumber, registerSize);
 	m_registerSize = registerSize;
-	m_dataSize = dataSize;
+	m_dataSize = expectedDataSize;
 	m_type = I2C_READ;
 }
 
 void I2C_Message::configureReadWithComparison(vector<uint8_t> registerNumber,
-		uint64_t dataSize, const vector<uint8_t> dataCompare,
+		uint64_t expectedDataSize, const vector<uint8_t> dataCompare,
 		bool compareEquals)
 {
 	m_registerNumber = registerNumber;
 	m_registerSize = registerNumber.size();
-	m_dataSize = dataSize;
+	m_dataSize = expectedDataSize;
 	m_compareData = dataCompare;
 	m_type =
 			compareEquals ? I2C_READ_COMPARE_EQUAL : I2C_READ_COMPARE_NOT_EQUAL;
 }
 void I2C_Message::configureReadWithComparison(uint64_t registerNumber,
-		uint64_t registerSize, uint64_t dataSize, const uint64_t dataCompare,
+		uint64_t registerSize, uint64_t expectedDataSize, const uint64_t dataCompare,
 		bool compareEquals)
 {
 	m_registerNumber = Utils::extractBytes(registerNumber, registerSize);
 	m_registerSize = registerSize;
-	m_dataSize = dataSize;
-	m_compareData = Utils::extractBytes(dataCompare, dataSize);
+	m_dataSize = expectedDataSize;
+	m_compareData = Utils::extractBytes(dataCompare, expectedDataSize);
 	m_type =
 			compareEquals ? I2C_READ_COMPARE_EQUAL : I2C_READ_COMPARE_NOT_EQUAL;
 

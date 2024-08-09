@@ -15,7 +15,7 @@ I2C_Transaction_Message::I2C_Transaction_Message() :
 				true), m_transactionDelayUsec(0), m_messages(), m_callbackContext(
 		NULL), m_callback(NULL)
 {
-
+	setType(REQUEST_RESPONSE);
 }
 I2C_Transaction_Message::I2C_Transaction_Message(uint8_t chipNumber,
 		vector<I2C_Message> messageQueue, uint64_t transactionDelayUsec) :
@@ -42,6 +42,8 @@ I2C_Transaction_Message& I2C_Transaction_Message::operator=(
 	m_messages = other.m_messages;
 	m_callbackContext = other.m_callbackContext;
 	m_callback = other.m_callback;
+	m_handle = other.m_handle;
+	m_type = other.m_type;
 	return *this;
 }
 
