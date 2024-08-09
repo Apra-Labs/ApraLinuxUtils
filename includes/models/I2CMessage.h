@@ -26,14 +26,14 @@ public:
 	void configureWrite(vector<uint8_t> registerNumber, vector<uint8_t> data);
 	void configureWrite(uint64_t registerNumber, uint64_t data,
 			uint64_t registerSize, uint64_t dataSize);
-	void configureRead(vector<uint8_t> registerNumber, uint64_t dataSize);
+	void configureRead(vector<uint8_t> registerNumber, uint64_t expectedDataSize);
 	void configureRead(uint64_t registerNumber, uint64_t registerSize,
-			uint64_t dataSize);
+			uint64_t expectedDataSize);
 	void configureReadWithComparison(vector<uint8_t> registerNumber,
-			uint64_t dataSize, const vector<uint8_t> dataCompare,
+			uint64_t expectedDataSize, const vector<uint8_t> dataCompare,
 			bool compareEquals);
 	void configureReadWithComparison(uint64_t registerNumber,
-			uint64_t registerSize, uint64_t dataSize,
+			uint64_t registerSize, uint64_t expectedDataSize,
 			const uint64_t dataCompare, bool compareEquals);
 	void addDelay(uint64_t delayInUsec);
 	void setRetries(uint64_t retryCount);

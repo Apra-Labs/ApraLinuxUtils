@@ -41,6 +41,7 @@ I2C_Interface::~I2C_Interface()
 
 I2CError I2C_Interface::reSetupI2CBus()
 {
+	ScopeLock lock(m_processLock);
 	I2CError response;
 	m_i2cBus.closeBus();
 	m_setupSuccess = false;
@@ -74,30 +75,12 @@ void I2C_Interface::process(Message *obj)
 		return;
 	}
 	processEvents();
-	MONOCURRTIME(m_lastProcessedEventTs);
 	if (!obj)
 	{
 		return;
 	}
 	I2C_Transaction_Message *txMessage = (I2C_Transaction_Message*) obj;
 	processMessage(txMessage);
-	enqueResponse(txMessage);
-	if (txMessage->m_transactionDelayUsec > 0)
-	{
-		MONOCURRTIME(timeNow);
-		uint64_t timeDelay = txMessage->m_transactionDelayUsec;
-		if ((timeNow - m_lastProcessedEventTs) > m_frequSec)
-		{
-			processEvents();
-			MONOTIMEUS(m_lastProcessedEventTs);
-			timeDelay = getNormalizedDelay(m_lastProcessedEventTs, timeNow,
-					txMessage->m_transactionDelayUsec);
-		}
-		if (timeDelay)
-		{
-			usleep(timeDelay);
-		}
-	}
 	std::queue<I2C_Transaction_Message*> requests;
 	{
 		ScopeLock lock(m_requestLock);
@@ -120,7 +103,6 @@ void I2C_Interface::process(Message *obj)
 			processMessage(item);
 		}
 	}
-
 }
 
 void I2C_Interface::processEvents()
@@ -135,6 +117,7 @@ void I2C_Interface::processEvents()
 		ScopeLock lock(m_eventMessageLock);
 		eventMessages = m_registeredEvents;
 	}
+	bool isAnyEventProcessed = false;
 	for (map<uint64_t, I2C_Transaction_Message>::iterator eventItr =
 			eventMessages.begin(); eventItr != eventMessages.end(); eventItr++)
 	{
@@ -143,11 +126,16 @@ void I2C_Interface::processEvents()
 		{
 			continue;
 		}
+		isAnyEventProcessed = true;
 		I2C_Transaction_Message i2cTxMessage = eventItr->second;
 		processI2CTransaction(&i2cTxMessage);
 		i2cTxMessage.publishTransaction();
 	}
 	m_processedEvents.clear();
+	if (isAnyEventProcessed)
+	{
+		MONOTIMEUS(m_lastProcessedEventTs);
+	}
 }
 
 void I2C_Interface::processSingleEvent()
@@ -194,7 +182,6 @@ void I2C_Interface::processMessage(I2C_Transaction_Message *txMessage)
 		if ((timeNow - m_lastProcessedEventTs) > m_frequSec)
 		{
 			processEvents();
-			MONOTIMEUS(m_lastProcessedEventTs);
 			timeDelay = getNormalizedDelay(m_lastProcessedEventTs, timeNow,
 					txMessage->m_transactionDelayUsec);
 		}
@@ -202,6 +189,10 @@ void I2C_Interface::processMessage(I2C_Transaction_Message *txMessage)
 		{
 			usleep(timeDelay);
 		}
+	}
+	else
+	{
+		processEvents();
 	}
 }
 
@@ -222,8 +213,11 @@ I2CError I2C_Interface::performRead(uint8_t chipNumber, I2C_Message &message)
 				usleep(message.m_retryDelayInUsec);
 			}
 		}
-		response = m_i2cBus.genericRead(chipNumber, message.m_registerNumber,
-				message.m_data);
+		{
+			ScopeLock lock(m_processLock);
+			response = m_i2cBus.genericRead(chipNumber,
+					message.m_registerNumber, message.m_data);
+		}
 		if (!response.isError())
 		{
 			break;
@@ -251,8 +245,11 @@ I2CError I2C_Interface::performCompareRead(uint8_t chipNumber,
 				usleep(message.m_retryDelayInUsec);
 			}
 		}
-		response = m_i2cBus.genericRead(chipNumber, message.m_registerNumber,
-				message.m_data);
+		{
+			ScopeLock lock(m_processLock);
+			response = m_i2cBus.genericRead(chipNumber,
+					message.m_registerNumber, message.m_data);
+		}
 		if (!response.isError())
 		{
 			if (compareEquals
@@ -289,8 +286,11 @@ I2CError I2C_Interface::performWrite(uint8_t chipNumber, I2C_Message &message)
 				usleep(message.m_retryDelayInUsec);
 			}
 		}
-		response = m_i2cBus.genericWrite(chipNumber, message.m_registerNumber,
-				message.m_data);
+		{
+			ScopeLock lock(m_processLock);
+			response = m_i2cBus.genericWrite(chipNumber,
+					message.m_registerNumber, message.m_data);
+		}
 		if (!response.isError())
 		{
 			break;
