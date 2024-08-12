@@ -21,7 +21,7 @@ namespace apra
 class I2C_Interface: public ProcessThread
 {
 public:
-	I2C_Interface(string i2cPath, string name, uint64_t fpsHz,
+	I2C_Interface(string i2cPath, string processName, uint64_t processFpsHz,
 			bool shouldPrint);
 	virtual ~I2C_Interface();
 	virtual void process(Message *obj);

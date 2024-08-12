@@ -310,26 +310,26 @@ void I2C_Interface::processI2CTransaction(I2C_Transaction_Message *txMessage)
 		I2CError i2cError;
 		switch (i2cMessages[messageIndex].m_type)
 		{
-		case I2C_READ:
-		{
-			i2cError = performRead(txMessage->m_chipNumber,
-					i2cMessages[messageIndex]);
-			break;
-		}
-		case I2C_READ_COMPARE_EQUAL:
-		case I2C_READ_COMPARE_NOT_EQUAL:
-		{
-			i2cError = performCompareRead(txMessage->m_chipNumber,
-					i2cMessages[messageIndex],
-					i2cMessages[messageIndex].m_type == I2C_READ_COMPARE_EQUAL);
-			break;
-		}
-		case I2C_WRITE:
-		{
-			i2cError = performWrite(txMessage->m_chipNumber,
-					i2cMessages[messageIndex]);
-			break;
-		}
+			case I2C_READ:
+			{
+				i2cError = performRead(txMessage->m_chipNumber,
+						i2cMessages[messageIndex]);
+				break;
+			}
+			case I2C_READ_COMPARE_EQUAL:
+			case I2C_READ_COMPARE_NOT_EQUAL:
+			{
+				i2cError = performCompareRead(txMessage->m_chipNumber,
+						i2cMessages[messageIndex],
+						i2cMessages[messageIndex].m_type == I2C_READ_COMPARE_EQUAL);
+				break;
+			}
+			case I2C_WRITE:
+			{
+				i2cError = performWrite(txMessage->m_chipNumber,
+						i2cMessages[messageIndex]);
+				break;
+			}
 		}
 		if (i2cError.isError())
 		{
