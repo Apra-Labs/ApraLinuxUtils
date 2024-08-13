@@ -10,7 +10,7 @@
 namespace apra
 {
 Message::Message() :
-		m_type(NO_TYPE)
+		m_type(REQUEST_ONLY)
 {
 	GTMONOTIMENS(m_handle)
 }
