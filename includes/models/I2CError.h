@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_MODELS_I2CERROR_H_
-#define INCLUDES_MODELS_I2CERROR_H_
+#ifndef INCLUDES_APRA_MODELS_I2CERROR_H_
+#define INCLUDES_APRA_MODELS_I2CERROR_H_
 
 #include <models/GenericError.h>
 
@@ -38,4 +38,4 @@ protected:
 
 } /* namespace apra */
 
-#endif /* INCLUDES_MODELS_I2CERROR_H_ */
+#endif /* INCLUDES_APRA_MODELS_I2CERROR_H_ */

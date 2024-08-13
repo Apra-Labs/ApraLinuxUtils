@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef MESSAGE_H_
-#define MESSAGE_H_
+#ifndef INCLUDES_APRA_MESSAGE_H_
+#define INCLUDES_APRA_MESSAGE_H_
 
 #include <sys/types.h>
 #include <pthread.h>
@@ -34,5 +34,5 @@ protected:
 };
 }
 
-#endif /* MESSAGE_H_ */
+#endif /* INCLUDES_APRA_MESSAGE_H_ */
 

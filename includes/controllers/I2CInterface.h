@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef SRC_CONTROLLERS_I2CINTERFACE_H_
-#define SRC_CONTROLLERS_I2CINTERFACE_H_
+#ifndef SRC_APRA_CONTROLLERS_I2CINTERFACE_H_
+#define SRC_APRA_CONTROLLERS_I2CINTERFACE_H_
 
 #include <map>
 #include <string>
@@ -54,4 +54,4 @@ protected:
 
 } /* namespace apra */
 
-#endif /* SRC_CONTROLLERS_I2CINTERFACE_H_ */
+#endif /* SRC_APRA_CONTROLLERS_I2CINTERFACE_H_ */
