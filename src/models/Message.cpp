@@ -30,4 +30,8 @@ MESSAGE_TYPE Message::getType()
 	return m_type;
 }
 
+uint64_t Message::getHandle()
+{
+	return m_handle;
+}
 }
