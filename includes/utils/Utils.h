@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef SRC_UTILS_H_
-#define SRC_UTILS_H_
+#ifndef SRC_APRA_UTILS_H_
+#define SRC_APRA_UTILS_H_
 
 #include <array>
 #include <string>
@@ -48,4 +48,4 @@ private:
 };
 }
 
-#endif /* SRC_UTILS_H_ */
+#endif /* SRC_APRA_UTILS_H_ */

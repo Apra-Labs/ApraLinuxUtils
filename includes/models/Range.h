@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_MODELS_RANGE_H_
-#define INCLUDES_MODELS_RANGE_H_
+#ifndef INCLUDES_APRA_MODELS_RANGE_H_
+#define INCLUDES_APRA_MODELS_RANGE_H_
 #include <stdint.h>
 
 namespace apra
@@ -25,4 +25,4 @@ public:
 
 }  // namespace apra
 
-#endif /* INCLUDES_MODELS_RANGE_H_ */
+#endif /* INCLUDES_APRA_MODELS_RANGE_H_ */

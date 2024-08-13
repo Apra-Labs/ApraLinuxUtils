@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef REALHEXPARSER_H_
-#define REALHEXPARSER_H_
+#ifndef INCLUDES_APRA_REALHEXPARSER_H_
+#define INCLUDES_APRA_REALHEXPARSER_H_
 #include <stdint.h>
 namespace apra
 {
@@ -23,4 +23,4 @@ private:
 };
 }
 
-#endif /* REALHEXPARSER_H_ */
+#endif /* INCLUDES_APRA_REALHEXPARSER_H_ */

@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_CONSTANTS_STORAGETYPE_H_
-#define INCLUDES_CONSTANTS_STORAGETYPE_H_
+#ifndef INCLUDES_APRA_CONSTANTS_STORAGETYPE_H_
+#define INCLUDES_APRA_CONSTANTS_STORAGETYPE_H_
 #include <string>
 
 namespace apra
@@ -25,4 +25,4 @@ public:
 
 } /* namespace apra */
 
-#endif /* INCLUDES_CONSTANTS_STORAGETYPE_H_ */
+#endif /* INCLUDES_APRA_CONSTANTS_STORAGETYPE_H_ */

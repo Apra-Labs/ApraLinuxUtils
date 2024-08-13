@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_MODELS_STORAGEMINIMALINFO_H_
-#define INCLUDES_MODELS_STORAGEMINIMALINFO_H_
+#ifndef INCLUDES_APRA_MODELS_STORAGEMINIMALINFO_H_
+#define INCLUDES_APRA_MODELS_STORAGEMINIMALINFO_H_
 #include <string>
 
 namespace apra
@@ -27,4 +27,4 @@ public:
 
 } /* namespace apra */
 
-#endif /* INCLUDES_MODELS_STORAGEMINIMALINFO_H_ */
+#endif /* INCLUDES_APRA_MODELS_STORAGEMINIMALINFO_H_ */

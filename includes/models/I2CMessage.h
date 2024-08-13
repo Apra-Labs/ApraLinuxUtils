@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef SRC_MODELS_I2CMESSAGE_H_
-#define SRC_MODELS_I2CMESSAGE_H_
+#ifndef SRC_APRA_MODELS_I2CMESSAGE_H_
+#define SRC_APRA_MODELS_I2CMESSAGE_H_
 
 #include <stdint.h>
 #include <vector>
@@ -57,4 +57,4 @@ protected:
 
 } /* namespace apra */
 
-#endif /* SRC_MODELS_I2CMESSAGE_H_ */
+#endif /* SRC_APRA_MODELS_I2CMESSAGE_H_ */
