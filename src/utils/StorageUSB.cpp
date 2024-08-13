@@ -594,43 +594,44 @@ bool StorageUSB::getStorageInfo(uint64_t &freeSpaceInMB,
 	}
 	if (m_shouldPrint)
 	{
-		printf("stat.f_bsize=%lu\n stat.f_frsize=%lu\n stat.f_bfree=%lu\n "
-				"stat.f_blocks=%lu\n", stat.f_bsize, stat.f_frsize,
+		printf("stat.f_bsize=%" PRIu64 "\n stat.f_frsize=%" PRIu64 "\n stat.f_bfree=%" PRIu64 "\n "
+				"stat.f_blocks=%" PRIu64 "\n", stat.f_bsize, stat.f_frsize,
 				stat.f_bfree, stat.f_blocks);
 	}
 	uint64_t sz = stat.f_bsize;
 	if (m_shouldPrint)
 	{
-		printf("int sz = stat.f_bsize; === %lu = %lu\n", sz, stat.f_bsize);
-		printf("sz *= stat.f_bfree === %lu *= %lu\n", sz, stat.f_bfree);
+		printf("int sz = stat.f_bsize; === %" PRIu64 " = %" PRIu64 "\n", sz, stat.f_bsize);
+		printf("sz *= stat.f_bfree === %" PRIu64 " *= %" PRIu64 "\n", sz, stat.f_bfree);
 	}
 	sz *= stat.f_bfree;
 	freeSpaceInMB = sz >> 20;
 	if (m_shouldPrint)
 	{
-		printf("int freeSpaceInMB = sz >> 20 === int %lu = %lu >> 20\n",
+		printf("int freeSpaceInMB = sz >> 20 === int %" PRId64 " = %" PRId64 " >> 20\n",
 				freeSpaceInMB, sz);
 	}
 	sz = stat.f_frsize;
 
 	if (m_shouldPrint)
 	{
-		printf("sz = stat.f_bsize; === %lu = %lu;\n", sz, stat.f_bsize);
+		printf("sz = stat.f_bsize; === %" PRId64 " = %" PRId64 ";\n", sz, stat.f_bsize);
 	}
 
 	sz *= stat.f_blocks;
 
 	if (m_shouldPrint)
 	{
-		printf("sz *= stat.f_blocks; === %lu *= %lu;\n", sz, stat.f_blocks);
+		printf("sz *= stat.f_blocks; === %" PRIu64 " *= %" PRIu64 ";\n", sz,
+				stat.f_blocks);
 	}
 
 	totalCapacityInMB = sz >> 20;
 
 	if (m_shouldPrint)
 	{
-		printf("int totalSpaceInMB = sz >> 20; === int %lu = "
-				"%lu >> 20;\n", totalCapacityInMB, sz);
+		printf("int totalSpaceInMB = sz >> 20; === int %" PRIu64 " = "
+		"%" PRIu64 " >> 20;\n", totalCapacityInMB, sz);
 	}
 	return true;
 }
