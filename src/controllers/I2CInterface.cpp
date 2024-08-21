@@ -131,6 +131,7 @@ void I2C_Interface::processEvents()
 		processI2CTransaction(&i2cTxMessage);
 		i2cTxMessage.publishTransaction();
 	}
+
 	m_processedEvents.clear();
 	if (isAnyEventProcessed)
 	{
@@ -215,6 +216,8 @@ I2CError I2C_Interface::performRead(uint8_t chipNumber, I2C_Message &message)
 		}
 		{
 			ScopeLock lock(m_processLock);
+			m_i2cBus.setSize(message.m_registerNumber.size(),
+					message.getDataSize());
 			response = m_i2cBus.genericRead(chipNumber,
 					message.m_registerNumber, message.m_data);
 		}
@@ -247,6 +250,8 @@ I2CError I2C_Interface::performCompareRead(uint8_t chipNumber,
 		}
 		{
 			ScopeLock lock(m_processLock);
+			m_i2cBus.setSize(message.m_registerNumber.size(),
+					message.getDataSize());
 			response = m_i2cBus.genericRead(chipNumber,
 					message.m_registerNumber, message.m_data);
 		}
@@ -269,6 +274,7 @@ I2CError I2C_Interface::performCompareRead(uint8_t chipNumber,
 	message.m_error = response;
 	return response;
 }
+
 I2CError I2C_Interface::performWrite(uint8_t chipNumber, I2C_Message &message)
 {
 	I2CError response;
@@ -288,6 +294,8 @@ I2CError I2C_Interface::performWrite(uint8_t chipNumber, I2C_Message &message)
 		}
 		{
 			ScopeLock lock(m_processLock);
+			m_i2cBus.setSize(message.m_registerNumber.size(),
+								message.m_data.size());
 			response = m_i2cBus.genericWrite(chipNumber,
 					message.m_registerNumber, message.m_data);
 		}
@@ -303,33 +311,33 @@ I2CError I2C_Interface::performWrite(uint8_t chipNumber, I2C_Message &message)
 void I2C_Interface::processI2CTransaction(I2C_Transaction_Message *txMessage)
 {
 	I2CError transactionError;
-	vector<I2C_Message> i2cMessages = txMessage->getAllMessages();
-	for (size_t messageIndex = 0; messageIndex < i2cMessages.size();
+	for (size_t messageIndex = 0; messageIndex < txMessage->m_messages.size();
 			messageIndex++)
 	{
 		I2CError i2cError;
-		switch (i2cMessages[messageIndex].m_type)
+		switch (txMessage->m_messages[messageIndex].m_type)
 		{
-			case I2C_READ:
-			{
-				i2cError = performRead(txMessage->m_chipNumber,
-						i2cMessages[messageIndex]);
-				break;
-			}
-			case I2C_READ_COMPARE_EQUAL:
-			case I2C_READ_COMPARE_NOT_EQUAL:
-			{
-				i2cError = performCompareRead(txMessage->m_chipNumber,
-						i2cMessages[messageIndex],
-						i2cMessages[messageIndex].m_type == I2C_READ_COMPARE_EQUAL);
-				break;
-			}
-			case I2C_WRITE:
-			{
-				i2cError = performWrite(txMessage->m_chipNumber,
-						i2cMessages[messageIndex]);
-				break;
-			}
+		case I2C_READ:
+		{
+			i2cError = performRead(txMessage->m_chipNumber,
+					txMessage->m_messages[messageIndex]);
+			break;
+		}
+		case I2C_READ_COMPARE_EQUAL:
+		case I2C_READ_COMPARE_NOT_EQUAL:
+		{
+			i2cError = performCompareRead(txMessage->m_chipNumber,
+					txMessage->m_messages[messageIndex],
+					txMessage->m_messages[messageIndex].m_type
+							== I2C_READ_COMPARE_EQUAL);
+			break;
+		}
+		case I2C_WRITE:
+		{
+			i2cError = performWrite(txMessage->m_chipNumber,
+					txMessage->m_messages[messageIndex]);
+			break;
+		}
 		}
 		if (i2cError.isError())
 		{
@@ -339,16 +347,16 @@ void I2C_Interface::processI2CTransaction(I2C_Transaction_Message *txMessage)
 				break;
 			}
 		}
-		if (i2cMessages[messageIndex].m_delayInUsec)
+		if (txMessage->m_messages[messageIndex].m_delayInUsec)
 		{
-			if (i2cMessages[messageIndex].m_allowOtherProcessOnIdle)
+			if (txMessage->m_messages[messageIndex].m_allowOtherProcessOnIdle)
 			{
 				performTransactionDelay(
-						i2cMessages[messageIndex].m_delayInUsec);
+						txMessage->m_messages[messageIndex].m_delayInUsec);
 			}
 			else
 			{
-				usleep(i2cMessages[messageIndex].m_delayInUsec);
+				usleep(txMessage->m_messages[messageIndex].m_delayInUsec);
 			}
 		}
 	}

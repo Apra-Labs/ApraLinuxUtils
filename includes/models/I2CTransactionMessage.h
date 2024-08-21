@@ -19,7 +19,7 @@ class I2C_Transaction_Message: public Message
 {
 public:
 	I2C_Transaction_Message();
-	I2C_Transaction_Message(uint8_t chipNumber,
+	I2C_Transaction_Message(uint16_t chipNumber,
 			vector<I2C_Message> messageQueue,
 			uint64_t transactionDelayUsec = 0);
 	virtual ~I2C_Transaction_Message();
@@ -27,10 +27,10 @@ public:
 	I2CError getError();
 	void setError(I2CError error);
 	vector<I2C_Message>& getAllMessages();
-	void registerEventHandle(I2CEventCallback *callback, void *context);
+	void registerEventHandle(void *callback, void *context);
 	void publishTransaction();
 	I2CError m_error;
-	uint8_t m_chipNumber;
+	uint16_t m_chipNumber;
 	bool m_stopOnAnyTransactionFailure;
 	uint64_t m_transactionDelayUsec;
 	vector<I2C_Message> m_messages;

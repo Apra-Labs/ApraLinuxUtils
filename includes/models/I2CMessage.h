@@ -39,6 +39,7 @@ public:
 	void setRetries(uint64_t retryCount);
 	uint64_t getCombinedData();
 	uint64_t getCombinedRegister();
+	uint64_t getDataSize();
 
 	I2CError m_error;
 	I2C_MESSAGE_TYPE m_type;

@@ -73,8 +73,8 @@ void I2C_Message::configureReadWithComparison(vector<uint8_t> registerNumber,
 			compareEquals ? I2C_READ_COMPARE_EQUAL : I2C_READ_COMPARE_NOT_EQUAL;
 }
 void I2C_Message::configureReadWithComparison(uint64_t registerNumber,
-		uint64_t registerSize, uint64_t expectedDataSize, const uint64_t dataCompare,
-		bool compareEquals)
+		uint64_t registerSize, uint64_t expectedDataSize,
+		const uint64_t dataCompare, bool compareEquals)
 {
 	m_registerNumber = Utils::extractBytes(registerNumber, registerSize);
 	m_registerSize = registerSize;
@@ -107,6 +107,11 @@ uint64_t I2C_Message::getCombinedData()
 uint64_t I2C_Message::getCombinedRegister()
 {
 	return Utils::combineBytes(m_registerNumber);
+}
+
+uint64_t I2C_Message::getDataSize()
+{
+	return m_dataSize;
 }
 
 } /* namespace apra */
