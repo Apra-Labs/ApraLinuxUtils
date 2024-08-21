@@ -15,6 +15,7 @@ class I2C_Transaction_Message;
 
 }  // namespace apra
 
-typedef void* I2CEventCallback(void *context, apra::I2C_Transaction_Message message);
+typedef void* I2CEventCallback(void *context,
+		apra::I2C_Transaction_Message message);
 
 #endif /* INCLUDES_CALLBACK_EVENTCALLBACKS_H_ */

@@ -6,6 +6,10 @@
  */
 
 #include <models/I2CTransactionMessage.h>
+#include "utils/Macro.h"
+#include <iostream>
+#include <inttypes.h>
+#include <stdio.h>
 
 namespace apra
 {
@@ -17,13 +21,12 @@ I2C_Transaction_Message::I2C_Transaction_Message() :
 {
 	setType(REQUEST_RESPONSE);
 }
-I2C_Transaction_Message::I2C_Transaction_Message(uint8_t chipNumber,
+I2C_Transaction_Message::I2C_Transaction_Message(uint16_t chipNumber,
 		vector<I2C_Message> messageQueue, uint64_t transactionDelayUsec) :
 		Message(), m_error(), m_chipNumber(chipNumber), m_stopOnAnyTransactionFailure(
 				true), m_transactionDelayUsec(transactionDelayUsec), m_messages(
 				messageQueue), m_callbackContext(NULL), m_callback(NULL)
 {
-	// TODO Auto-generated constructor stub
 	setType(REQUEST_RESPONSE);
 }
 
@@ -62,10 +65,9 @@ vector<I2C_Message>& I2C_Transaction_Message::getAllMessages()
 	return m_messages;
 }
 
-void I2C_Transaction_Message::registerEventHandle(I2CEventCallback *callback,
-		void *context)
+void I2C_Transaction_Message::registerEventHandle(void *callback, void *context)
 {
-	m_callback = callback;
+	m_callback = (I2CEventCallback *) (callback);
 	m_callbackContext = context;
 }
 
