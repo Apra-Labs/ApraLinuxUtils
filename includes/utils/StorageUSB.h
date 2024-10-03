@@ -47,6 +47,7 @@ protected:
 	bool mountWithoutPrivilege(StorageMinimalInfo storageDevice);
 	StorageMinimalInfo getHighCapacityPartition(std::string deviceNode);
 	bool isDeviceNodeConnected();
+	void checkDeviceNode();
 
 	bool m_shouldPrint;
 	std::vector<STORAGE_TYPE> m_supportedTypes;

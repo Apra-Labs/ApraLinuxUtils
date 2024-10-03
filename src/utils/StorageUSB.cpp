@@ -21,6 +21,8 @@
 #include "utils/Utils.h"
 #include <utils/StorageUSB.h>
 #include "utils/Macro.h"
+#include <algorithm>
+#include <iostream>
 
 #define MAX_BUF_LEN 1024
 
@@ -32,7 +34,7 @@ StorageUSB::StorageUSB(string mountPath, vector<STORAGE_TYPE> supportedTypes,
 		bool shouldPrint, bool skipMount) :
 		m_shouldPrint(shouldPrint), m_supportedTypes(supportedTypes), m_mountPoint(
 				mountPath), m_deviceNode(), m_partitionNode(), m_skipMount(
-				skipMount), m_state(STORAGE_SAFE_EJECT), m_manualPath(mountPath)
+				skipMount), m_state(STORAGE_SAFE_EJECT), m_manualPath(mountPath), m_fsFormat("")
 {
 	// TODO Auto-generated constructor stub
 	string error;
@@ -154,6 +156,7 @@ string StorageUSB::mountDevice()
 {
 	string usbMountPath;
 	string devNode = insertCheck();
+	bool isSupportedFs = false;
 	if (m_skipMount)
 	{
 		StorageMinimalInfo highPartition = getHighCapacityPartition(devNode);
@@ -163,6 +166,13 @@ string StorageUSB::mountDevice()
 			m_mountPoint = usbMountPath;
 			m_partitionNode = highPartition.m_partition;
 		}
+		STORAGE_TYPE type = STORAGE_TYPE_STRING::getEnum(highPartition.m_fsType);
+
+		auto it = std::find(m_supportedTypes.begin(),
+		                    m_supportedTypes.end(),
+							type);
+
+		isSupportedFs = (it != m_supportedTypes.end());
 	}
 	else
 	{
@@ -171,7 +181,11 @@ string StorageUSB::mountDevice()
 			usbMountPath = m_mountPoint;
 		}
 	}
-	if (!usbMountPath.empty())
+	if (!isSupportedFs)
+	{
+		m_state = STORAGE_INSERTED_UNMOUNTED;
+	}
+	else if (!usbMountPath.empty())
 	{
 		m_state = STORAGE_MOUNTED;
 	}
@@ -619,6 +633,20 @@ bool StorageUSB::getStorageInfo(uint64_t &freeSpaceInMB,
 				"%lu >> 20;\n", totalCapacityInMB, sz);
 	}
 	return true;
+}
+
+void StorageUSB::checkDeviceNode()
+{
+	struct stat buffer;
+	string path = m_partitionNode;
+	if (path.length() && stat(path.c_str(), &buffer) == 0)
+	{
+		if (S_ISBLK(buffer.st_mode))
+		{
+			return;
+		}
+	}
+	m_state = STORAGE_SAFE_EJECT;
 }
 
 }

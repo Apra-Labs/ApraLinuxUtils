@@ -35,9 +35,13 @@ STORAGE_TYPE STORAGE_TYPE_STRING::getEnum(std::string typeStr)
 	{
 		return EXT4;
 	}
-	else
+	else if (typeStr == getString(FAT32))
 	{
 		return FAT32;
+	}
+	else
+	{
+		return static_cast<STORAGE_TYPE>(-1);
 	}
 }
 
