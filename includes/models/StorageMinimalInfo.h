@@ -7,6 +7,7 @@
 
 #ifndef INCLUDES_APRA_MODELS_STORAGEMINIMALINFO_H_
 #define INCLUDES_APRA_MODELS_STORAGEMINIMALINFO_H_
+#include <cstdint>
 #include <string>
 
 namespace apra
