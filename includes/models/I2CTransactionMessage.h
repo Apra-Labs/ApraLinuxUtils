@@ -29,7 +29,6 @@ public:
 	vector<I2C_Message>& getAllMessages();
 	void registerEventHandle(void *callback, void *context);
 	void publishTransaction();
-	I2CError m_error;
 	uint16_t m_chipNumber;
 	bool m_stopOnAnyTransactionFailure;
 	uint64_t m_transactionDelayUsec;
@@ -37,6 +36,7 @@ public:
 protected:
 	void *m_callbackContext;
 	I2CEventCallback *m_callback;
+	I2CError m_error;
 };
 
 } /* namespace apra */
