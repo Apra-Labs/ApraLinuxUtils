@@ -6,6 +6,7 @@
  */
 
 #include <algorithm>
+#include <stdexcept>
 #include "utils/Macro.h"
 #include "utils/ScopeLock.h"
 #include "controllers/I2CInterface.h"
