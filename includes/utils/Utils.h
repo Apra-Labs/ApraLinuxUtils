@@ -42,6 +42,8 @@ public:
 	static double convertFrom10p6(uint16_t value);
 	static uint16_t convertToUFormat(double value, uint8_t format);
 	static double convertFromUFormat(uint16_t value, uint8_t format);
+	static uint64_t mergefrom8Bytes(uint8_t *bytes);
+	static void extractTo8Bytes(uint64_t timeInSec, uint8_t *bytes);
 private:
 	static void getFilesInDirectoryRecursive(const std::string &directoryPath,
 			std::vector<std::string> &fileList);
