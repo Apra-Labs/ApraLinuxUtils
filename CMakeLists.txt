@@ -6,6 +6,24 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
 
 project(ApraUtils)
 
+# Platform check - this library is Linux-only
+if(NOT UNIX OR APPLE)
+    message(FATAL_ERROR
+        "\n"
+        "========================================================================\n"
+        "  ApraUtils is designed for embedded Linux systems only.\n"
+        "  \n"
+        "  This library requires:\n"
+        "    - Linux kernel headers (I2C, GPIO, PWM)\n"
+        "    - POSIX threads (pthread)\n"
+        "    - Linux-specific system interfaces\n"
+        "  \n"
+        "  Supported platforms: Linux only\n"
+        "  Current platform: ${CMAKE_SYSTEM_NAME}\n"
+        "========================================================================\n"
+    )
+endif()
+
 find_package(PkgConfig REQUIRED)
 
 include_directories(AFTER SYSTEM include)

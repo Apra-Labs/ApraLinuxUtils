@@ -360,7 +360,7 @@ void I2C_Interface::processI2CTransaction(I2C_Transaction_Message *txMessage)
 			}
 		}
 	}
-	txMessage->m_error = transactionError;
+	txMessage->setError(transactionError);
 }
 
 void I2C_Interface::performTransactionDelay(const uint64_t timeDelay)
