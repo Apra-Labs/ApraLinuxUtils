@@ -27,7 +27,7 @@ jobs:
         cd build
         make
     - name: Publish artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: libApraUtils
         path: build/libApraUtils.a
