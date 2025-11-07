@@ -31,7 +31,6 @@
 #include "utils/RealHexParser.h"
 #include "utils/ScopeFunction.h"
 #include "utils/ScopeLock.h"
-#include "utils/StorageUSB.h"
 #include "utils/Utils.h"
 
 #endif /* INCLUDES_APRAUTILS_H_ */

@@ -18,6 +18,7 @@ public:
 	Range();
 	Range(int64_t min, int64_t max, bool isReversed = false);
 	virtual ~Range();
+	Range operator=(const Range &t);
 	int64_t m_min;
 	int64_t m_max;
 	bool m_isReversed;

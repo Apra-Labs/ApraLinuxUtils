@@ -29,11 +29,11 @@ public:
 	bool getStorageInfo(uint64_t &freeSpaceInMB, uint64_t &totalCapacityInMB);
 	STORAGE_STATE getStatus();
 	std::string getMountPath();
+	struct udev_device* getChildDevice(struct udev *udev,
+			struct udev_device *parent, const char *subsystem);
 protected:
 	string findMountDeviceBylsblk(string devicePartitionNode);
 	string findMountedDevice(string devicePartitionNode);
-	struct udev_device* getChildDevice(struct udev *udev,
-			struct udev_device *parent, const char *subsystem);
 	std::string enumerateDevices(struct udev *udev);
 	std::vector<StorageMinimalInfo> getPartitions(std::string devpath);
 	bool mountDeviceNode(string deviceNode);
