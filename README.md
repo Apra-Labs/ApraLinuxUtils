@@ -68,6 +68,8 @@ Download the latest release from the [Releases](https://github.com/Apra-Labs/Apr
 
 ### From Source
 
+#### Quick Build
+
 ```bash
 # Clone the repository
 git clone https://github.com/Apra-Labs/ApraUtils.git
@@ -75,14 +77,41 @@ cd ApraUtils
 
 # Install dependencies (Ubuntu/Debian)
 sudo apt-get update
-sudo apt-get install -y cmake libudev-dev
+sudo apt-get install -y cmake libudev-dev build-essential
 
-# Build the library
-mkdir build && cd build
-cmake ..
-make
+# Build the library using the build script
+./build.sh
 
 # The static library will be available at build/libApraUtils.a
+```
+
+#### Build with Tests
+
+```bash
+# Build with unit tests
+./build.sh --tests
+
+# Run the tests
+./test.sh
+```
+
+#### Build with Code Coverage
+
+```bash
+# Install coverage tools
+sudo apt-get install -y lcov
+
+# Build with coverage enabled
+./build.sh --coverage
+
+# Run tests
+./test.sh
+
+# Generate coverage report
+./coverage.sh
+
+# Open coverage report in browser
+./coverage.sh --open
 ```
 
 ## Quick Start
@@ -183,10 +212,43 @@ For complete API documentation, see the [API Reference](docs/API.md).
 
 ## Building from Source
 
-### Build Options
+### Using Build Scripts (Recommended)
+
+ApraUtils provides convenient build scripts for easy compilation:
+
+#### Standard Build
+```bash
+./build.sh                    # Build release library
+./build.sh --debug            # Build debug library
+./build.sh --clean            # Clean build
+./build.sh -j 8               # Build with 8 parallel jobs
+```
+
+#### Build with Tests
+```bash
+./build.sh --tests            # Build with unit tests
+./test.sh                     # Run all tests
+./test.sh --verbose           # Run tests with verbose output
+./test.sh --filter "Range*"   # Run specific tests
+./test.sh --list              # List all available tests
+```
+
+#### Build with Code Coverage
+```bash
+./build.sh --coverage         # Build with coverage enabled
+./test.sh                     # Run tests
+./coverage.sh                 # Generate coverage report
+./coverage.sh --open          # Generate and open in browser
+./coverage.sh --threshold 90  # Check 90% coverage threshold
+```
+
+### Build Options (Manual CMake)
+
+For manual builds or integration with existing build systems:
 
 ```bash
 # Standard build
+mkdir build && cd build
 cmake ..
 make
 
@@ -197,16 +259,42 @@ make
 # Release build with optimizations
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make
-```
 
-### Running Tests
-
-```bash
-# Build tests
+# Build with tests
 cmake -DBUILD_TESTS=ON ..
 make
 ctest
+
+# Build with coverage
+cmake -DBUILD_TESTS=ON -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ..
+make
+./ApraUtils_tests
 ```
+
+### Build Script Options
+
+**build.sh options:**
+- `-h, --help` - Show help message
+- `-d, --debug` - Build in Debug mode
+- `-t, --tests` - Build with unit tests
+- `-c, --coverage` - Enable code coverage
+- `-j N, --jobs N` - Number of parallel jobs
+- `--clean` - Clean build directory first
+- `--install` - Install after building
+
+**test.sh options:**
+- `-h, --help` - Show help message
+- `-v, --verbose` - Verbose test output
+- `-f PATTERN, --filter PATTERN` - Run specific tests
+- `-r N, --repeat N` - Repeat tests N times
+- `-l, --list` - List all tests
+- `--ctest` - Use CTest runner
+
+**coverage.sh options:**
+- `-h, --help` - Show help message
+- `-o, --open` - Open report in browser
+- `-t N, --threshold N` - Set coverage threshold
+- `--clean` - Clean previous coverage data
 
 ## Project Structure
 
@@ -222,12 +310,19 @@ ApraUtils/
 │   ├── controllers/
 │   ├── models/
 │   └── utils/
+├── tests/             # Unit tests
+│   ├── unit/          # Unit test files
+│   ├── mocks/         # Mock objects for testing
+│   └── main_test.cpp  # Test entry point
 ├── examples/          # Usage examples
 ├── .github/
-│   └── workflows/     # CI/CD configurations
+│   ├── workflows/     # CI/CD configurations
+│   └── ISSUE_TEMPLATE/  # Issue templates
+├── build.sh           # Build script
+├── test.sh            # Test script
+├── coverage.sh        # Coverage script
 ├── CMakeLists.txt     # Build configuration
 └── LICENSE            # MIT License
-
 ```
 
 ## Contributing

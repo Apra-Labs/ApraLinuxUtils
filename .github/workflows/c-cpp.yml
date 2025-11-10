@@ -2,43 +2,158 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "om/docs-with-coverage" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake libudev-dev lcov
-    - name: Create build directory
-      run: mkdir -p build
-    - name: Configure
+        sudo apt-get install -y cmake libudev-dev lcov build-essential
+
+    - name: Configure CMake with tests and coverage
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DBUILD_TESTS=ON \
+          -DENABLE_COVERAGE=ON
+
+    - name: Build library and tests
       run: |
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="--coverage -fprofile-arcs -ftest-coverage" -DCMAKE_EXE_LINKER_FLAGS="--coverage" ..
-    - name: Build
+        make -j$(nproc)
+
+    - name: Run unit tests
       run: |
         cd build
-        make
-    - name: Generate coverage report
+        ./ApraUtils_tests --gtest_output=xml:test_results.xml
+
+    - name: Capture coverage data
       run: |
         cd build
-        lcov --capture --directory . --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' '*/test/*' --output-file coverage.info
-        lcov --list coverage.info
-    - name: Upload coverage artifact
+        lcov --capture \
+          --directory . \
+          --output-file coverage.info \
+          --rc lcov_branch_coverage=1
+
+    - name: Filter coverage data
+      run: |
+        cd build
+        lcov --remove coverage.info \
+          '/usr/*' \
+          '*/tests/*' \
+          '*/build/*' \
+          '*/googletest/*' \
+          --output-file coverage_filtered.info \
+          --rc lcov_branch_coverage=1
+
+    - name: Generate coverage summary
+      id: coverage
+      run: |
+        cd build
+        lcov --list coverage_filtered.info --rc lcov_branch_coverage=1
+
+        # Extract coverage percentage
+        COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 | grep "lines......" | tail -1 | grep -oP '\d+\.\d+(?=%)')
+        echo "COVERAGE_PERCENT=$COVERAGE" >> $GITHUB_OUTPUT
+        echo "Code coverage: $COVERAGE%"
+
+    - name: Generate HTML coverage report
+      run: |
+        cd build
+        mkdir -p coverage_html
+        genhtml coverage_filtered.info \
+          --output-directory coverage_html \
+          --title "ApraUtils Code Coverage" \
+          --legend \
+          --show-details \
+          --branch-coverage \
+          --rc genhtml_branch_coverage=1
+
+    - name: Upload coverage report (HTML)
       uses: actions/upload-artifact@v4
       with:
-        name: coverage-report
-        path: build/coverage.info
-    - name: Publish library artifact
+        name: coverage-report-html
+        path: build/coverage_html/
+        retention-days: 30
+
+    - name: Upload coverage data (lcov)
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report-lcov
+        path: build/coverage_filtered.info
+        retention-days: 30
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: build/test_results.xml
+        retention-days: 30
+
+    - name: Upload library artifact
       uses: actions/upload-artifact@v4
       with:
         name: libApraUtils
         path: build/libApraUtils.a
+        retention-days: 30
+
+    - name: Create coverage badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      if: github.ref == 'refs/heads/main'
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: ${{ secrets.GIST_ID }}
+        filename: aprautils-coverage.json
+        label: Coverage
+        message: ${{ steps.coverage.outputs.COVERAGE_PERCENT }}%
+        valColorRange: ${{ steps.coverage.outputs.COVERAGE_PERCENT }}
+        maxColorRange: 90
+        minColorRange: 50
+
+    - name: Comment coverage on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const coverage = '${{ steps.coverage.outputs.COVERAGE_PERCENT }}';
+          const comment = `## 📊 Code Coverage Report
+
+          **Coverage:** ${coverage}%
+
+          - 🎯 Target: 90%
+          - ${parseFloat(coverage) >= 90 ? '✅' : '⚠️'} ${parseFloat(coverage) >= 90 ? 'Coverage threshold met!' : 'Coverage below target'}
+
+          [View detailed coverage report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          `;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+
+    - name: Check coverage threshold
+      run: |
+        cd build
+        COVERAGE=$(lcov --summary coverage_filtered.info 2>&1 | grep "lines......" | tail -1 | grep -oP '\d+\.\d+(?=%)')
+        THRESHOLD=50
+        echo "Coverage: $COVERAGE%"
+        echo "Threshold: $THRESHOLD%"
+        if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
+          echo "⚠️ Warning: Coverage $COVERAGE% is below threshold $THRESHOLD%"
+          echo "This is a warning only - not failing the build yet"
+        else
+          echo "✅ Coverage threshold met!"
+        fi
