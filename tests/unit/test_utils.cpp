@@ -278,7 +278,7 @@ TEST_F(UtilsTest, Convert10p6RoundTrip) {
 // Test convertToUFormat and convertFromUFormat
 TEST_F(UtilsTest, ConvertUFormatRoundTrip) {
     double value = 7.5;
-    uint8_t format = 4;
+    uint8_t format = 12.4;
 
     uint16_t encoded = Utils::convertToUFormat(value, format);
     double decoded = Utils::convertFromUFormat(encoded, format);
