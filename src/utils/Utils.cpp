@@ -149,7 +149,7 @@ bool Utils::caseInsensitiveSearch(std::string const str,
 	if (pattern.empty()) {
         return true;
     }
-	
+
 	std::string::const_iterator it = std::search(str.begin(), str.end(),
 			pattern.begin(), pattern.end(),
 			[](unsigned char ch1, unsigned char ch2)
@@ -369,7 +369,7 @@ double Utils::convertFromUFormat(uint16_t value, uint8_t format)
 	double decVal = 0;
 	uint16_t fractionValue = 0;
 	decVal = value >> format;
-	fractionValue = value & format;
+	fractionValue = value & ((1 << format) - 1);
 	double temp = 0.00;
 	double twos = 2.00;
 	for (int32_t idx = (format - 1); idx >= 0; idx--)
