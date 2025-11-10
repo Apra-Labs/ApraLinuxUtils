@@ -9,6 +9,7 @@
 #define INCLUDES_APRA_MACRO_H_
 
 #include "ScopeFunction.h"
+#include <time.h>
 #include <sys/time.h>
 /*
  * Timestamp Functions
