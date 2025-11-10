@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_SCOPEFUNCTION_H_
-#define INCLUDES_SCOPEFUNCTION_H_
+#ifndef INCLUDES_APRA_SCOPEFUNCTION_H_
+#define INCLUDES_APRA_SCOPEFUNCTION_H_
 #include <string>
 
 namespace apra
@@ -21,4 +21,4 @@ private:
 };
 }
 
-#endif /* INCLUDES_SCOPEFUNCTION_H_ */
+#endif /* INCLUDES_APRA_SCOPEFUNCTION_H_ */

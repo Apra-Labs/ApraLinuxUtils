@@ -5,10 +5,11 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_MACRO_H_
-#define INCLUDES_MACRO_H_
+#ifndef INCLUDES_APRA_MACRO_H_
+#define INCLUDES_APRA_MACRO_H_
 
 #include "ScopeFunction.h"
+#include <time.h>
 #include <sys/time.h>
 /*
  * Timestamp Functions
@@ -78,4 +79,4 @@
 	MONOTIMEUS(ret); \
 }
 
-#endif /* INCLUDES_MACRO_H_ */
+#endif /* INCLUDES_APRA_MACRO_H_ */

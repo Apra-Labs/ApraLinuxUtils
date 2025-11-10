@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_UTILS_STORAGEUSB_H_
-#define INCLUDES_UTILS_STORAGEUSB_H_
+#ifndef INCLUDES_APRA_UTILS_STORAGEUSB_H_
+#define INCLUDES_APRA_UTILS_STORAGEUSB_H_
 #include <string>
 #include <vector>
 #include <constants/StorageType.h>
@@ -29,11 +29,11 @@ public:
 	bool getStorageInfo(uint64_t &freeSpaceInMB, uint64_t &totalCapacityInMB);
 	STORAGE_STATE getStatus();
 	std::string getMountPath();
+	struct udev_device* getChildDevice(struct udev *udev,
+			struct udev_device *parent, const char *subsystem);
 protected:
 	string findMountDeviceBylsblk(string devicePartitionNode);
 	string findMountedDevice(string devicePartitionNode);
-	struct udev_device* getChildDevice(struct udev *udev,
-			struct udev_device *parent, const char *subsystem);
 	std::string enumerateDevices(struct udev *udev);
 	std::vector<StorageMinimalInfo> getPartitions(std::string devpath);
 	bool mountDeviceNode(string deviceNode);
@@ -60,4 +60,4 @@ protected:
 
 } /* namespace apra */
 
-#endif /* INCLUDES_UTILS_STORAGEUSB_H_ */
+#endif /* INCLUDES_APRA_UTILS_STORAGEUSB_H_ */

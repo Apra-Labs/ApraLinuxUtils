@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef SRC_UTILS_I2CBUS_H_
-#define SRC_UTILS_I2CBUS_H_
+#ifndef SRC_APRA_UTILS_I2CBUS_H_
+#define SRC_APRA_UTILS_I2CBUS_H_
 #include <string>
 #include <vector>
 
@@ -47,4 +47,4 @@ private:
 };
 }
 
-#endif /* SRC_UTILS_I2CBUS_H_ */
+#endif /* SRC_APRA_UTILS_I2CBUS_H_ */

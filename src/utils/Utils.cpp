@@ -359,7 +359,7 @@ uint16_t Utils::convertToUFormat(double value, uint8_t format)
 }
 double Utils::convertFromUFormat(uint16_t value, uint8_t format)
 {
-    double returnValue;
+	double returnValue;
 	double decVal = 0;
 	uint16_t fractionValue = 0;
 	decVal = value >> format;
@@ -373,4 +373,29 @@ double Utils::convertFromUFormat(uint16_t value, uint8_t format)
 	}
 	returnValue = (decVal + temp);
 	return returnValue;
+}
+uint64_t Utils::mergefrom8Bytes(uint8_t * bytes)
+{
+	uint64_t response = 0;
+	if (bytes)
+	{
+		for (uint8_t cnt = 0; cnt < 8; cnt++)
+		{
+			uint64_t pushValue = bytes[cnt];
+			response |= pushValue << (8 * cnt);
+		}
+	}
+	return response;
+}
+
+void Utils::extractTo8Bytes(uint64_t timeInSec, uint8_t *bytes)
+{
+	if (bytes)
+	{
+		for (uint8_t cnt = 0; cnt < 8; cnt++)
+		{
+			uint64_t extractedBytes = (timeInSec >> (8 * cnt));
+			bytes[cnt] = extractedBytes & 0xFF;
+		}
+	}
 }

@@ -25,4 +25,10 @@ Range::~Range()
 {
 	// TODO Auto-generated destructor stub
 }
+Range Range::operator=(const Range &t)
+{
+	m_min = t.m_min;
+	m_max = t.m_max;
+	return *this;
+}
 

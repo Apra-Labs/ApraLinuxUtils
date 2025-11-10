@@ -1,5 +1,5 @@
-#ifndef SYNCHRONIZATION_H_
-#define SYNCHRONIZATION_H_
+#ifndef INCLUDES_APRA_SYNCHRONIZATION_H_
+#define INCLUDES_APRA_SYNCHRONIZATION_H_
 
 #include <pthread.h>
 #include <vector>
@@ -19,4 +19,4 @@ protected:
 };
 }
 
-#endif /* SYNCHRONIZATION_H_ */
+#endif /* INCLUDES_APRA_SYNCHRONIZATION_H_ */

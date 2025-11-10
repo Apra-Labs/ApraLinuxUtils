@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef PROCESSTHREAD_H_
-#define PROCESSTHREAD_H_
+#ifndef INCLUDES_APRA_PROCESSTHREAD_H_
+#define INCLUDES_APRA_PROCESSTHREAD_H_
 
 #include <sys/types.h>
 #include <pthread.h>
@@ -61,4 +61,4 @@ protected:
 };
 }
 
-#endif /* PROCESSTHREAD_H_ */
+#endif /* INCLUDES_APRA_PROCESSTHREAD_H_ */

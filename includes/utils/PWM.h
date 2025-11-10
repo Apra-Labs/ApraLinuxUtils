@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_UTILS_PWM_H_
-#define INCLUDES_UTILS_PWM_H_
+#ifndef INCLUDES_APRA_UTILS_PWM_H_
+#define INCLUDES_APRA_UTILS_PWM_H_
 
 #include <stdint.h>
 #include <string>
@@ -48,4 +48,4 @@ private:
 
 } /* namespace apra */
 
-#endif /* INCLUDES_UTILS_PWM_H_ */
+#endif /* INCLUDES_APRA_UTILS_PWM_H_ */

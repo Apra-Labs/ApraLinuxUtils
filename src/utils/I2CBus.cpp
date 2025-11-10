@@ -96,14 +96,16 @@ I2CError I2C_Bus::genericWrite(uint8_t chipAddress,
 		debugString += " , 0x";
 		for (uint32_t count = 0; count < registerAddress.size(); count++)
 		{
-			char regCh[5] = { 0 };
+			char regCh[5] =
+			{	0};
 			sprintf(regCh, "%02x", registerAddress[count]);
 			debugString += string(regCh);
 		}
 		debugString += " <--> 0x";
 		for (uint32_t count = 0; count < data.size(); count++)
 		{
-			char dataCh[5] = { 0 };
+			char dataCh[5] =
+			{	0};
 			sprintf(dataCh, "%02x", data[count]);
 			debugString += string(dataCh);
 		}
@@ -112,11 +114,13 @@ I2CError I2C_Bus::genericWrite(uint8_t chipAddress,
 		{
 			printf("%s", debugString.c_str());
 		}
-		if (ioctl(m_i2cFileDescriptor, I2C_RDWR, &msgset) < 0 && m_shouldPrint)
+		if (ioctl(m_i2cFileDescriptor, I2C_RDWR, &msgset) < 0)
 		{
 			error = I2CError("ioctl(I2C_RDWR) in i2c_write", debugString,
 					WRITE_ERROR);
-			perror(error.getMessage().c_str());
+			if(m_shouldPrint)
+			{
+				perror(error.getMessage().c_str());}
 		}
 		else
 		{
@@ -164,16 +168,19 @@ I2CError I2C_Bus::genericRead(uint8_t chipAddress,
 		debugString += " , 0x";
 		for (uint32_t count = 0; count < registerAddress.size(); count++)
 		{
-			char regCh[5] = { 0 };
+			char regCh[5] =
+			{	0};
 			sprintf(regCh, "%02x", registerAddress[count]);
 			debugString += string(regCh);
 		}
-		if (ioctl(m_i2cFileDescriptor, I2C_RDWR, &msgset) < 0 && m_shouldPrint)
+		if (ioctl(m_i2cFileDescriptor, I2C_RDWR, &msgset) < 0 )
 		{
 			debugString += "\n";
 			error = I2CError("ioctl(I2C_RDWR) in i2c_read", debugString,
 					READ_ERROR);
-			perror(error.getMessage().c_str());
+			if(m_shouldPrint)
+			{
+				perror(error.getMessage().c_str());}
 		}
 		else
 		{

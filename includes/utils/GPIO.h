@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef GPIO_H_
-#define GPIO_H_
+#ifndef INCLUDES_APRA_GPIO_H_
+#define INCLUDES_APRA_GPIO_H_
 
 #include <sys/types.h>
 #include <string>
@@ -49,4 +49,4 @@ private:
 };
 }
 
-#endif /* GPIO_H_ */
+#endif /* INCLUDES_APRA_GPIO_H_ */

@@ -5,8 +5,8 @@
  *      Author: developer
  */
 
-#ifndef INCLUDES_GENERICERROR_H_
-#define INCLUDES_GENERICERROR_H_
+#ifndef INCLUDES_APRA_GENERICERROR_H_
+#define INCLUDES_APRA_GENERICERROR_H_
 #include <string>
 #include <vector>
 
@@ -31,4 +31,4 @@ protected:
 
 }  // namespace apra
 
-#endif /* INCLUDES_GENERICERROR_H_ */
+#endif /* INCLUDES_APRA_GENERICERROR_H_ */
