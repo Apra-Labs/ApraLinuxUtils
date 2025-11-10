@@ -21,7 +21,7 @@ NC='\033[0m' # No Color
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
-TEST_EXECUTABLE="${BUILD_DIR}/ApraUtils_tests"
+TEST_EXECUTABLE="${BUILD_DIR}/ApraUtilsTests"
 
 # Default options
 VERBOSE=false
