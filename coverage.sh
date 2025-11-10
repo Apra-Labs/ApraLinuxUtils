@@ -22,7 +22,7 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
 COVERAGE_DIR="${BUILD_DIR}/coverage"
-TEST_EXECUTABLE="${BUILD_DIR}/ApraUtils_tests"
+TEST_EXECUTABLE="${BUILD_DIR}/ApraUtilsTests"
 
 # Default options
 OPEN_BROWSER=false
@@ -167,9 +167,10 @@ lcov --remove "${COVERAGE_DIR}/coverage.info" \
     '*/tests/*' \
     '*/build/*' \
     '*/googletest/*' \
+    '*/_deps/*' \
     --output-file "${COVERAGE_DIR}/coverage_filtered.info" \
     --rc branch_coverage=1 \
-    --ignore-errors mismatch \
+    --ignore-errors mismatch,unused \
     || {
         print_error "Failed to filter coverage data"
         exit 1
@@ -184,7 +185,7 @@ genhtml "${COVERAGE_DIR}/coverage_filtered.info" \
     --show-details \
     --branch-coverage \
     --rc branch_coverage=1 \
-    --ignore-errors mismatch \
+    --ignore-errors mismatch,unused \
     || {
         print_error "Failed to generate HTML report"
         exit 1
