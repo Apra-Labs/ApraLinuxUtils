@@ -62,9 +62,10 @@ jobs:
           '*/tests/*' \
           '*/build/*' \
           '*/googletest/*' \
+          '*/_deps/*' \
           --output-file coverage_filtered.info \
           --rc branch_coverage=1 \
-          --ignore-errors mismatch
+          --ignore-errors mismatch,unused
 
     - name: Generate coverage summary
       id: coverage
