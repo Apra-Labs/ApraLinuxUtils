@@ -1,8 +1,12 @@
 /*
  * PWM.h
  *
- *  Created on: 20-Oct-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #ifndef INCLUDES_APRA_UTILS_PWM_H_

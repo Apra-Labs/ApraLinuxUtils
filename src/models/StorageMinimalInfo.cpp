@@ -1,8 +1,12 @@
 /*
  * StorageInfo.cpp
  *
- *  Created on: 18-Apr-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <models/StorageMinimalInfo.h>
@@ -14,8 +18,6 @@ StorageMinimalInfo::StorageMinimalInfo(std::string partition, uint64_t size,
 		std::string fsType) :
 		m_partition(partition), m_size(size), m_fsType(fsType)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 StorageMinimalInfo::StorageMinimalInfo() :
@@ -26,7 +28,6 @@ StorageMinimalInfo::StorageMinimalInfo() :
 
 StorageMinimalInfo::~StorageMinimalInfo()
 {
-	// TODO Auto-generated destructor stub
 }
 
 StorageMinimalInfo& StorageMinimalInfo::operator=(

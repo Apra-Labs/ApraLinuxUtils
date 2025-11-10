@@ -1,8 +1,12 @@
 /*
  * I2CInterface.cpp
  *
- *  Created on: Aug 5, 2024
- *      Author: Apra Labs
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <algorithm>
@@ -19,7 +23,6 @@ I2C_Interface::I2C_Interface(string i2cPath, string name, uint64_t fpsHz,
 		ProcessThread(name, fpsHz), m_i2cPath(i2cPath), m_i2cBus(i2cPath,
 				shouldPrint), m_lastProcessedEventTs(0), m_setupSuccess(false)
 {
-	// TODO Auto-generated constructor stub
 	I2CError i2cError = m_i2cBus.openBus();
 	if (i2cError.isError())
 	{
@@ -36,7 +39,6 @@ I2C_Interface::I2C_Interface(string i2cPath, string name, uint64_t fpsHz,
 
 I2C_Interface::~I2C_Interface()
 {
-	// TODO Auto-generated destructor stub
 	m_i2cBus.closeBus();
 }
 

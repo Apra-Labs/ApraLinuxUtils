@@ -1,8 +1,12 @@
 /*
  * PWM.cpp
  *
- *  Created on: 20-Oct-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <stddef.h>
@@ -30,7 +34,6 @@ PWM::PWM(uint32_t pwmChipNo, uint32_t pwmPinNo, bool shouldPrint) :
 				0), m_nSecDutyCycle(0), m_chipPath(SYS_PWM_PATH), m_isSetupComplete(
 				false), m_isPWMRunning(false)
 {
-	// TODO Auto-generated constructor stub
 	m_chipPath += "/pwmchip" + to_string(m_chipNo);
 	if (!Utils::directoryExists(m_chipPath))
 	{
@@ -42,7 +45,6 @@ PWM::PWM(uint32_t pwmChipNo, uint32_t pwmPinNo, bool shouldPrint) :
 
 PWM::~PWM()
 {
-	// TODO Auto-generated destructor stub
 	destroy();
 }
 

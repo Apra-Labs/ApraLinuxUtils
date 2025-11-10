@@ -1,8 +1,12 @@
 /*
  * I2CMessageType.h
  *
- *  Created on: Aug 5, 2024
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #ifndef INCLUDES_APRA_CONSTANTS_I2CMESSAGETYPE_H_
