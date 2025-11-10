@@ -153,7 +153,8 @@ print_info "Capturing coverage data..."
 lcov --capture \
     --directory . \
     --output-file "${COVERAGE_DIR}/coverage.info" \
-    --rc lcov_branch_coverage=1 \
+    --rc branch_coverage=1 \
+    --ignore-errors mismatch \
     || {
         print_error "Failed to capture coverage data"
         exit 1
@@ -167,7 +168,8 @@ lcov --remove "${COVERAGE_DIR}/coverage.info" \
     '*/build/*' \
     '*/googletest/*' \
     --output-file "${COVERAGE_DIR}/coverage_filtered.info" \
-    --rc lcov_branch_coverage=1 \
+    --rc branch_coverage=1 \
+    --ignore-errors mismatch \
     || {
         print_error "Failed to filter coverage data"
         exit 1
@@ -181,7 +183,8 @@ genhtml "${COVERAGE_DIR}/coverage_filtered.info" \
     --legend \
     --show-details \
     --branch-coverage \
-    --rc genhtml_branch_coverage=1 \
+    --rc branch_coverage=1 \
+    --ignore-errors mismatch \
     || {
         print_error "Failed to generate HTML report"
         exit 1
@@ -192,7 +195,7 @@ print_success "Coverage report generated"
 # Display coverage summary
 echo ""
 print_info "Coverage Summary:"
-lcov --summary "${COVERAGE_DIR}/coverage_filtered.info" --rc lcov_branch_coverage=1
+lcov --summary "${COVERAGE_DIR}/coverage_filtered.info" --rc branch_coverage=1
 
 # Extract coverage percentage
 COVERAGE_LINE=$(lcov --summary "${COVERAGE_DIR}/coverage_filtered.info" 2>&1 | grep "lines......" | tail -1)
