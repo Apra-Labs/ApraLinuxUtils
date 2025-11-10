@@ -1,8 +1,12 @@
 /*
  * I2CErrorCode.cpp
  *
- *  Created on: 02-Mar-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <models/I2CError.h>
@@ -13,8 +17,6 @@ namespace apra
 I2CError::I2CError() :
 		GenericError(), m_code(NO_ERROR)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 I2CError::I2CError(std::string message) :

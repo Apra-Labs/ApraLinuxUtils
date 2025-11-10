@@ -1,8 +1,12 @@
 /*
  * I2CMessage.cpp
  *
- *  Created on: Aug 5, 2024
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include "models/I2CMessage.h"
@@ -17,13 +21,10 @@ I2C_Message::I2C_Message() :
 		I2C_RETRY_FAILURE_DELAY), m_allowOtherProcessOnIdle(false), m_registerSize(
 				0), m_dataSize(0)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 I2C_Message::~I2C_Message()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void I2C_Message::configureWrite(vector<uint8_t> registerNumber,

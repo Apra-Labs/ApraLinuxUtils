@@ -1,8 +1,12 @@
 /*
  * I2CBus.cpp
  *
- *  Created on: 05-Feb-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <linux/i2c-dev.h>
@@ -23,13 +27,11 @@ I2C_Bus::I2C_Bus(string i2cPath, bool shouldPrint) :
 		m_i2cPath(i2cPath), m_shouldPrint(shouldPrint), m_i2cFileDescriptor(-1), m_registerSize(
 				1), m_dataSize(1), m_lastI2COperationTs(0)
 {
-	// TODO Auto-generated constructor stub
 
 }
 
 I2C_Bus::~I2C_Bus()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool I2C_Bus::isI2CExecRecommended()

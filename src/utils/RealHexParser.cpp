@@ -1,8 +1,12 @@
 /*
  * RealHexParser.cpp
  *
- *  Created on: 29-Mar-2022
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include "utils/RealHexParser.h"
@@ -10,7 +14,6 @@ using namespace apra;
 
 RealHexParser::RealHexParser(uint8_t realPrecisionDigits) :
 		m_readDigits(realPrecisionDigits), m_bitsMask(0) {
-	// TODO Auto-generated constructor stub
 	if (realPrecisionDigits > 17) {
 		throw "Invalid value. Supported realDigits is upto 17. Ex 15.17";
 	}
@@ -20,7 +23,6 @@ RealHexParser::RealHexParser(uint8_t realPrecisionDigits) :
 }
 
 RealHexParser::~RealHexParser() {
-	// TODO Auto-generated destructor stub
 }
 
 uint32_t RealHexParser::toHex(double realNumber) {

@@ -1,8 +1,12 @@
 /*
  * I2CTransactionMessage.cpp
  *
- *  Created on: Aug 5, 2024
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <models/I2CTransactionMessage.h>
@@ -32,7 +36,6 @@ I2C_Transaction_Message::I2C_Transaction_Message(uint16_t chipNumber,
 
 I2C_Transaction_Message::~I2C_Transaction_Message()
 {
-	// TODO Auto-generated destructor stub
 }
 
 I2C_Transaction_Message& I2C_Transaction_Message::operator=(

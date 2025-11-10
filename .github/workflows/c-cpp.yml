@@ -15,18 +15,29 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake libudev-dev
+        sudo apt-get install -y cmake libudev-dev lcov
     - name: Create build directory
       run: mkdir -p build
     - name: Configure
       run: |
         cd build
-        cmake ..
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="--coverage -fprofile-arcs -ftest-coverage" -DCMAKE_EXE_LINKER_FLAGS="--coverage" ..
     - name: Build
       run: |
         cd build
         make
-    - name: Publish artifact
+    - name: Generate coverage report
+      run: |
+        cd build
+        lcov --capture --directory . --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' '*/test/*' --output-file coverage.info
+        lcov --list coverage.info
+    - name: Upload coverage artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: build/coverage.info
+    - name: Publish library artifact
       uses: actions/upload-artifact@v4
       with:
         name: libApraUtils
