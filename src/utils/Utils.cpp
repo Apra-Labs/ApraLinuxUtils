@@ -146,6 +146,10 @@ bool Utils::fileExists(const std::string &path)
 bool Utils::caseInsensitiveSearch(std::string const str,
 		std::string const pattern)
 {
+	if (pattern.empty()) {
+        return true;
+    }
+	
 	std::string::const_iterator it = std::search(str.begin(), str.end(),
 			pattern.begin(), pattern.end(),
 			[](unsigned char ch1, unsigned char ch2)
