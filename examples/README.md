@@ -1,6 +1,6 @@
-# ApraUtils Examples
+# ApraLinuxUtils Examples
 
-This directory contains comprehensive examples demonstrating how to use the ApraUtils library for embedded Linux development.
+This directory contains comprehensive examples demonstrating how to use the ApraLinuxUtils library for embedded Linux development.
 
 ## Available Examples
 
@@ -16,7 +16,7 @@ Demonstrates digital I/O operations:
 
 ```bash
 # Compile
-g++ -std=c++14 gpio_example.cpp -I../includes -L../build -lApraUtils -lpthread -o gpio_example
+g++ -std=c++14 gpio_example.cpp -I../includes -L../build -lApraLinuxUtils -lpthread -o gpio_example
 
 # Run all examples
 sudo ./gpio_example
@@ -40,7 +40,7 @@ Demonstrates I2C sensor interfacing:
 
 ```bash
 # Compile
-g++ -std=c++14 i2c_example.cpp -I../includes -L../build -lApraUtils -lpthread -o i2c_example
+g++ -std=c++14 i2c_example.cpp -I../includes -L../build -lApraLinuxUtils -lpthread -o i2c_example
 
 # Run
 sudo ./i2c_example
@@ -58,7 +58,7 @@ Demonstrates pulse width modulation:
 
 ```bash
 # Compile
-g++ -std=c++14 pwm_example.cpp -I../includes -L../build -lApraUtils -o pwm_example
+g++ -std=c++14 pwm_example.cpp -I../includes -L../build -lApraLinuxUtils -o pwm_example
 
 # Run all examples
 sudo ./pwm_example
@@ -80,7 +80,7 @@ Demonstrates USB device detection:
 
 ```bash
 # Compile
-g++ -std=c++14 usb_storage_example.cpp -I../includes -L../build -lApraUtils -ludev -o usb_storage_example
+g++ -std=c++14 usb_storage_example.cpp -I../includes -L../build -lApraLinuxUtils -ludev -o usb_storage_example
 
 # Run basic detection
 sudo ./usb_storage_example
@@ -105,7 +105,7 @@ Demonstrates thread management and message passing:
 
 ```bash
 # Compile
-g++ -std=c++14 threading_example.cpp -I../includes -L../build -lApraUtils -lpthread -o threading_example
+g++ -std=c++14 threading_example.cpp -I../includes -L../build -lApraLinuxUtils -lpthread -o threading_example
 
 # Run all examples
 ./threading_example
@@ -145,7 +145,7 @@ sudo usermod -a -G gpio,i2c,dialout $USER
 
 All examples can be compiled with:
 ```bash
-g++ -std=c++14 example_name.cpp -I../includes -L../build -lApraUtils [additional libs] -o example_name
+g++ -std=c++14 example_name.cpp -I../includes -L../build -lApraLinuxUtils [additional libs] -o example_name
 ```
 
 Common additional libraries:
@@ -168,7 +168,7 @@ Each example follows this structure:
 
 1. **Copyright Header**: MIT License with Apra Labs copyright
 2. **Documentation**: Purpose, hardware setup, compilation, execution
-3. **Includes**: ApraUtils and standard library headers
+3. **Includes**: ApraLinuxUtils and standard library headers
 4. **Helper Functions**: Utility functions for the examples
 5. **Example Functions**: Individual demonstrations
 6. **Main Function**: Command-line argument parsing and execution
@@ -224,16 +224,16 @@ ls /sys/class/pwm/
 ### Compilation Errors
 
 ```bash
-# Ensure ApraUtils is built
+# Ensure ApraLinuxUtils is built
 cd ../build
 cmake ..
 make
 
 # Check library path
-ls ../build/libApraUtils.a
+ls ../build/libApraLinuxUtils.a
 
 # Verify include path
-ls ../includes/ApraUtils.h
+ls ../includes/ApraLinuxUtils.h
 ```
 
 ## Contributing Examples
@@ -249,8 +249,8 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for details.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/Apra-Labs/ApraUtils/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Apra-Labs/ApraUtils/discussions)
+- **Issues**: [GitHub Issues](https://github.com/Apra-Labs/ApraLinuxUtils/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Apra-Labs/ApraLinuxUtils/discussions)
 - **Documentation**: [Main README](../README.md)
 
 ## License

@@ -12,7 +12,7 @@
 /*
  * I2C Communication Example
  *
- * This example demonstrates how to use the ApraUtils I2C interface to:
+ * This example demonstrates how to use the ApraLinuxUtils I2C interface to:
  * 1. Read temperature data from a TMP102 sensor (I2C address 0x48)
  * 2. Write configuration to the sensor
  * 3. Handle I2C transactions with error checking
@@ -35,7 +35,7 @@
  *
  * Compilation:
  * ------------
- * g++ -std=c++14 i2c_example.cpp -o i2c_example -lApraUtils -lpthread
+ * g++ -std=c++14 i2c_example.cpp -o i2c_example -lApraLinuxUtils -lpthread
  *
  * Execution:
  * ----------
@@ -209,7 +209,7 @@ void asynchronousReadExample(I2C_Interface& i2c) {
 // Main function
 int main() {
     cout << "==================================================" << endl;
-    cout << "ApraUtils I2C Communication Example" << endl;
+    cout << "ApraLinuxUtils I2C Communication Example" << endl;
     cout << "Testing with TMP102 Temperature Sensor" << endl;
     cout << "==================================================" << endl;
 

@@ -12,7 +12,7 @@
 /*
  * PWM Control Example
  *
- * This example demonstrates how to use the ApraUtils PWM interface to:
+ * This example demonstrates how to use the ApraLinuxUtils PWM interface to:
  * 1. Control LED brightness by varying duty cycle
  * 2. Control servo motor position
  * 3. Demonstrate different PWM frequencies
@@ -44,7 +44,7 @@
  *
  * Compilation:
  * ------------
- * g++ -std=c++14 pwm_example.cpp -o pwm_example -lApraUtils
+ * g++ -std=c++14 pwm_example.cpp -o pwm_example -lApraLinuxUtils
  *
  * Execution:
  * ----------
@@ -296,7 +296,7 @@ void frequencyVariationExample() {
 // Main function
 int main() {
     cout << "==================================================" << endl;
-    cout << "ApraUtils PWM Control Example" << endl;
+    cout << "ApraLinuxUtils PWM Control Example" << endl;
     cout << "==================================================" << endl;
     cout << "This example demonstrates PWM control for:" << endl;
     cout << "  1. LED brightness control" << endl;

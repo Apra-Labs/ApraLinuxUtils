@@ -116,6 +116,6 @@ Paste test output here
 - [ ] Performance may be affected (please explain)
 
 <!--
-Thank you for contributing to ApraUtils!
+Thank you for contributing to ApraLinuxUtils!
 Your efforts help make this project better for everyone.
 -->

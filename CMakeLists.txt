@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
 
-project(ApraUtils)
+project(ApraLinuxUtils)
 
 # Options for building tests and coverage
 option(BUILD_TESTS "Build unit tests" OFF)
@@ -15,7 +15,7 @@ if(NOT UNIX OR APPLE)
     message(FATAL_ERROR
         "\n"
         "========================================================================\n"
-        "  ApraUtils is designed for embedded Linux systems only.\n"
+        "  ApraLinuxUtils is designed for embedded Linux systems only.\n"
         "  \n"
         "  This library requires:\n"
         "    - Linux kernel headers (I2C, GPIO, PWM)\n"
@@ -45,7 +45,7 @@ if(ENABLE_COVERAGE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-add_library(ApraUtils STATIC ${CORE_CODE_FILES})
+add_library(ApraLinuxUtils STATIC ${CORE_CODE_FILES})
 
 # Google Test setup
 if(BUILD_TESTS)
@@ -69,23 +69,23 @@ if(BUILD_TESTS)
     file(GLOB_RECURSE TEST_SOURCES tests/*.cpp)
 
     # Create test executable
-    add_executable(ApraUtilsTests ${TEST_SOURCES})
+    add_executable(ApraLinuxUtilsTests ${TEST_SOURCES})
 
-    # Link against ApraUtils library and Google Test
-    target_link_libraries(ApraUtilsTests
-        ApraUtils
+    # Link against ApraLinuxUtils library and Google Test
+    target_link_libraries(ApraLinuxUtilsTests
+        ApraLinuxUtils
         gtest
         gtest_main
         pthread
     )
 
     # Include directories for tests
-    target_include_directories(ApraUtilsTests PRIVATE
+    target_include_directories(ApraLinuxUtilsTests PRIVATE
         ${CMAKE_SOURCE_DIR}/includes
         ${CMAKE_SOURCE_DIR}/tests
     )
 
     # Add tests to CTest
     include(GoogleTest)
-    gtest_discover_tests(ApraUtilsTests)
+    gtest_discover_tests(ApraLinuxUtilsTests)
 endif()
