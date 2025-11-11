@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Build System**
   - CMake build configuration (CMakeLists.txt)
   - C++14 standard support
-  - Static library output (libApraUtils.a)
+  - Static library output (libApraLinuxUtils.a)
   - GitHub Actions CI/CD pipeline
 
 - **Documentation**
@@ -149,10 +149,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Links
 
-- [Repository](https://github.com/Apra-Labs/ApraUtils)
-- [Issues](https://github.com/Apra-Labs/ApraUtils/issues)
-- [Pull Requests](https://github.com/Apra-Labs/ApraUtils/pulls)
-- [Releases](https://github.com/Apra-Labs/ApraUtils/releases)
+- [Repository](https://github.com/Apra-Labs/ApraLinuxUtils)
+- [Issues](https://github.com/Apra-Labs/ApraLinuxUtils/issues)
+- [Pull Requests](https://github.com/Apra-Labs/ApraLinuxUtils/pulls)
+- [Releases](https://github.com/Apra-Labs/ApraLinuxUtils/releases)
 
 ---
 

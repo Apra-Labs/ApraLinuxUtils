@@ -39,7 +39,7 @@
  *
  * Compilation:
  * ------------
- * g++ -std=c++14 usb_storage_example.cpp -o usb_storage_example -lApraUtils -ludev
+ * g++ -std=c++14 usb_storage_example.cpp -o usb_storage_example -lApraLinuxUtils -ludev
  *
  * Execution:
  * ----------
@@ -349,7 +349,7 @@ void detectionOnlyExample() {
 // Main function
 int main() {
     cout << "==================================================" << endl;
-    cout << "ApraUtils USB Storage Detection Example" << endl;
+    cout << "ApraLinuxUtils USB Storage Detection Example" << endl;
     cout << "==================================================" << endl;
     cout << "This example demonstrates:" << endl;
     cout << "  1. Basic USB detection and mounting" << endl;

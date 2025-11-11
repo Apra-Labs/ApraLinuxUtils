@@ -37,13 +37,13 @@ jobs:
     - name: Run unit tests
       run: |
         cd build
-        if [ ! -f "./ApraUtilsTests" ]; then
+        if [ ! -f "./ApraLinuxUtilsTests" ]; then
           echo "Error: Test executable not found!"
           echo "Available executables:"
           find . -type f -executable
           exit 1
         fi
-        ./ApraUtilsTests --gtest_output=xml:test_results.xml
+        ./ApraLinuxUtilsTests --gtest_output=xml:test_results.xml
 
     - name: Capture coverage data
       run: |
@@ -84,7 +84,7 @@ jobs:
         mkdir -p coverage_html
         genhtml coverage_filtered.info \
           --output-directory coverage_html \
-          --title "ApraUtils Code Coverage" \
+          --title "ApraLinuxUtils Code Coverage" \
           --legend \
           --show-details \
           --branch-coverage \
@@ -128,14 +128,14 @@ jobs:
       if: always()
       with:
         name: test-executable
-        path: build/ApraUtilsTests
+        path: build/ApraLinuxUtilsTests
         retention-days: 7
 
     - name: Upload library artifact
       uses: actions/upload-artifact@v4
       with:
-        name: libApraUtils
-        path: build/libApraUtils.a
+        name: libApraLinuxUtils
+        path: build/libApraLinuxUtils.a
         retention-days: 30
 
     - name: Create coverage badge
@@ -144,7 +144,7 @@ jobs:
       with:
         auth: ${{ secrets.GIST_SECRET }}
         gistID: ${{ secrets.GIST_ID }}
-        filename: aprautils-coverage.json
+        filename: apralinuxutils-coverage.json
         label: Coverage
         message: ${{ steps.coverage.outputs.COVERAGE_PERCENT }}%
         valColorRange: ${{ steps.coverage.outputs.COVERAGE_PERCENT }}

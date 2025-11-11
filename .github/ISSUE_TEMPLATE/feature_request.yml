@@ -1,5 +1,5 @@
 name: Feature Request
-description: Suggest an idea or enhancement for ApraUtils
+description: Suggest an idea or enhancement for ApraLinuxUtils
 title: "[Feature]: "
 labels: ["enhancement"]
 assignees: []
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a new feature! Your ideas help make ApraUtils better for everyone.
+        Thanks for suggesting a new feature! Your ideas help make ApraLinuxUtils better for everyone.
 
   - type: textarea
     id: problem
@@ -24,7 +24,7 @@ body:
     attributes:
       label: Proposed Solution
       description: Describe the solution you'd like
-      placeholder: "I would like ApraUtils to..."
+      placeholder: "I would like ApraLinuxUtils to..."
     validations:
       required: true
 

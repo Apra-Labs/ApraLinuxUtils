@@ -24,7 +24,7 @@
  * - Sensor connected to GPIO pin 25 (input with interrupt on rising edge)
  *
  * Compilation:
- * g++ -std=c++14 gpio_example.cpp -I../includes -L../build -lApraUtils -lpthread -o gpio_example
+ * g++ -std=c++14 gpio_example.cpp -I../includes -L../build -lApraLinuxUtils -lpthread -o gpio_example
  *
  * Execution:
  * sudo ./gpio_example
@@ -218,7 +218,7 @@ int main(int argc, char** argv)
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
 
-    cout << "ApraUtils GPIO Examples" << endl;
+    cout << "ApraLinuxUtils GPIO Examples" << endl;
     cout << "=======================" << endl;
     cout << "\nThese examples demonstrate GPIO functionality." << endl;
     cout << "Make sure you have the necessary hardware connected." << endl;

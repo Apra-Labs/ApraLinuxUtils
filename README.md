@@ -1,6 +1,6 @@
-# ApraUtils
+# ApraLinuxUtils
 
-[![Build Status](https://github.com/Apra-Labs/ApraUtils/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/Apra-Labs/ApraUtils/actions/workflows/c-cpp.yml)
+[![Build Status](https://github.com/Apra-Labs/ApraLinuxUtils/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/Apra-Labs/ApraLinuxUtils/actions/workflows/c-cpp.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![C++14](https://img.shields.io/badge/C++-14-blue.svg)](https://isocpp.org/std/the-standard)
 [![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)](https://www.linux.org/)
@@ -64,7 +64,7 @@ The library requires access to the following system interfaces:
 
 ### Using Pre-built Library
 
-Download the latest release from the [Releases](https://github.com/Apra-Labs/ApraUtils/releases) page.
+Download the latest release from the [Releases](https://github.com/Apra-Labs/ApraLinuxUtils/releases) page.
 
 ### From Source
 
@@ -72,8 +72,8 @@ Download the latest release from the [Releases](https://github.com/Apra-Labs/Apr
 
 ```bash
 # Clone the repository
-git clone https://github.com/Apra-Labs/ApraUtils.git
-cd ApraUtils
+git clone https://github.com/Apra-Labs/ApraLinuxUtils.git
+cd ApraLinuxUtils
 
 # Install dependencies (Ubuntu/Debian)
 sudo apt-get update
@@ -82,7 +82,7 @@ sudo apt-get install -y cmake libudev-dev build-essential
 # Build the library using the build script
 ./build.sh
 
-# The static library will be available at build/libApraUtils.a
+# The static library will be available at build/libApraLinuxUtils.a
 ```
 
 #### Build with Tests
@@ -122,18 +122,18 @@ sudo apt-get install -y lcov
 
 ```cmake
 # In your CMakeLists.txt
-include_directories(/path/to/ApraUtils/includes)
-link_directories(/path/to/ApraUtils/build)
+include_directories(/path/to/ApraLinuxUtils/includes)
+link_directories(/path/to/ApraLinuxUtils/build)
 
 add_executable(your_app main.cpp)
-target_link_libraries(your_app ApraUtils pthread udev)
+target_link_libraries(your_app ApraLinuxUtils pthread udev)
 ```
 
 #### Manual Compilation
 
 ```bash
-g++ -std=c++14 your_app.cpp -I/path/to/ApraUtils/includes \
-    -L/path/to/ApraUtils/build -lApraUtils -lpthread -ludev -o your_app
+g++ -std=c++14 your_app.cpp -I/path/to/ApraLinuxUtils/includes \
+    -L/path/to/ApraLinuxUtils/build -lApraLinuxUtils -lpthread -ludev -o your_app
 ```
 
 ### Basic Usage
@@ -299,7 +299,7 @@ make
 ## Project Structure
 
 ```
-ApraUtils/
+ApraLinuxUtils/
 ├── includes/           # Public header files
 │   ├── constants/     # Enum definitions
 │   ├── controllers/   # Controller classes
@@ -339,7 +339,7 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 
 ## Versioning
 
-We use [Semantic Versioning](https://semver.org/). For available versions, see the [tags on this repository](https://github.com/Apra-Labs/ApraUtils/tags).
+We use [Semantic Versioning](https://semver.org/). For available versions, see the [tags on this repository](https://github.com/Apra-Labs/ApraLinuxUtils/tags).
 
 ## License
 
@@ -349,9 +349,9 @@ Copyright (c) 2024 Apra Labs
 
 ## Support
 
-- **Documentation**: [GitHub Pages](https://apra-labs.github.io/ApraUtils/) (coming soon)
-- **Issues**: [GitHub Issues](https://github.com/Apra-Labs/ApraUtils/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Apra-Labs/ApraUtils/discussions)
+- **Documentation**: [GitHub Pages](https://apra-labs.github.io/ApraLinuxUtils/) (coming soon)
+- **Issues**: [GitHub Issues](https://github.com/Apra-Labs/ApraLinuxUtils/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Apra-Labs/ApraLinuxUtils/discussions)
 
 ## Acknowledgments
 

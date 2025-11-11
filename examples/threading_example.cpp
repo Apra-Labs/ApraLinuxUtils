@@ -12,7 +12,7 @@
 /*
  * Multi-Threading with ProcessThread Example
  *
- * This example demonstrates how to use the ApraUtils ProcessThread class to:
+ * This example demonstrates how to use the ApraLinuxUtils ProcessThread class to:
  * 1. Create custom threads by extending ProcessThread
  * 2. Implement message passing between threads
  * 3. Use REQUEST_ONLY and REQUEST_RESPONSE message types
@@ -35,7 +35,7 @@
  *
  * Compilation:
  * ------------
- * g++ -std=c++14 threading_example.cpp -o threading_example -lApraUtils -lpthread
+ * g++ -std=c++14 threading_example.cpp -o threading_example -lApraLinuxUtils -lpthread
  *
  * Execution:
  * ----------
@@ -467,7 +467,7 @@ void threadLifecycleExample() {
 // Main function
 int main() {
     cout << "==================================================" << endl;
-    cout << "ApraUtils ProcessThread Example" << endl;
+    cout << "ApraLinuxUtils ProcessThread Example" << endl;
     cout << "==================================================" << endl;
     cout << "This example demonstrates thread management and" << endl;
     cout << "message-based inter-thread communication." << endl;

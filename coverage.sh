@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# coverage.sh - Code coverage report generator for ApraUtils
+# coverage.sh - Code coverage report generator for ApraLinuxUtils
 #
 # Copyright (c) 2024 Apra Labs
 #
@@ -22,7 +22,7 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
 COVERAGE_DIR="${BUILD_DIR}/coverage"
-TEST_EXECUTABLE="${BUILD_DIR}/ApraUtilsTests"
+TEST_EXECUTABLE="${BUILD_DIR}/ApraLinuxUtilsTests"
 
 # Default options
 OPEN_BROWSER=false
@@ -50,7 +50,7 @@ show_usage() {
     cat << EOF
 Usage: $0 [OPTIONS]
 
-Generate code coverage report for ApraUtils library.
+Generate code coverage report for ApraLinuxUtils library.
 
 OPTIONS:
     -h, --help              Show this help message
@@ -180,7 +180,7 @@ lcov --remove "${COVERAGE_DIR}/coverage.info" \
 print_info "Generating HTML coverage report..."
 genhtml "${COVERAGE_DIR}/coverage_filtered.info" \
     --output-directory "${COVERAGE_DIR}/html" \
-    --title "ApraUtils Code Coverage" \
+    --title "ApraLinuxUtils Code Coverage" \
     --legend \
     --show-details \
     --branch-coverage \

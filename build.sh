@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# build.sh - Build script for ApraUtils library
+# build.sh - Build script for ApraLinuxUtils library
 #
 # Copyright (c) 2024 Apra Labs
 #
@@ -52,7 +52,7 @@ show_usage() {
     cat << EOF
 Usage: $0 [OPTIONS]
 
-Build script for ApraUtils library.
+Build script for ApraLinuxUtils library.
 
 OPTIONS:
     -h, --help              Show this help message
@@ -117,7 +117,7 @@ done
 
 # Check if running on Linux
 if [[ "$OSTYPE" != "linux-gnu"* ]]; then
-    print_error "ApraUtils is designed for Linux systems only"
+    print_error "ApraLinuxUtils is designed for Linux systems only"
     print_info "Current OS: $OSTYPE"
     exit 1
 fi
@@ -179,7 +179,7 @@ cmake .. \
 print_success "CMake configuration completed"
 
 # Build
-print_info "Building ApraUtils..."
+print_info "Building ApraLinuxUtils..."
 make -j"${JOBS}" || {
     print_error "Build failed"
     exit 1
@@ -189,19 +189,19 @@ print_success "Build completed successfully"
 
 # Show build artifacts
 print_info "Build artifacts:"
-if [ -f "${BUILD_DIR}/libApraUtils.a" ]; then
-    echo "  Library: ${BUILD_DIR}/libApraUtils.a"
-    ls -lh "${BUILD_DIR}/libApraUtils.a"
+if [ -f "${BUILD_DIR}/libApraLinuxUtils.a" ]; then
+    echo "  Library: ${BUILD_DIR}/libApraLinuxUtils.a"
+    ls -lh "${BUILD_DIR}/libApraLinuxUtils.a"
 fi
 
-if [ "$BUILD_TESTS" = "ON" ] && [ -f "${BUILD_DIR}/ApraUtils_tests" ]; then
-    echo "  Tests: ${BUILD_DIR}/ApraUtils_tests"
-    ls -lh "${BUILD_DIR}/ApraUtils_tests"
+if [ "$BUILD_TESTS" = "ON" ] && [ -f "${BUILD_DIR}/ApraLinuxUtilsTests" ]; then
+    echo "  Tests: ${BUILD_DIR}/ApraLinuxUtilsTests"
+    ls -lh "${BUILD_DIR}/ApraLinuxUtilsTests"
 fi
 
 # Install if requested
 if [ "$INSTALL" = true ]; then
-    print_info "Installing ApraUtils..."
+    print_info "Installing ApraLinuxUtils..."
     if [ "$EUID" -ne 0 ]; then
         print_warning "Installation requires root privileges"
         sudo make install || {
@@ -219,7 +219,7 @@ fi
 
 # Print next steps
 echo ""
-print_success "ApraUtils build completed!"
+print_success "ApraLinuxUtils build completed!"
 echo ""
 echo "Next steps:"
 if [ "$BUILD_TESTS" = "ON" ]; then
@@ -230,6 +230,6 @@ if [ "$BUILD_TESTS" = "ON" ]; then
 else
     echo "  - Run tests: ./build.sh --tests && ./test.sh"
 fi
-echo "  - View library: ls -lh ${BUILD_DIR}/libApraUtils.a"
+echo "  - View library: ls -lh ${BUILD_DIR}/libApraLinuxUtils.a"
 echo "  - Install: ./build.sh --install"
 echo ""

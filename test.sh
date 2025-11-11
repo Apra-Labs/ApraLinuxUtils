@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# test.sh - Test script for ApraUtils library
+# test.sh - Test script for ApraLinuxUtils library
 #
 # Copyright (c) 2024 Apra Labs
 #
@@ -21,7 +21,7 @@ NC='\033[0m' # No Color
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${SCRIPT_DIR}/build"
-TEST_EXECUTABLE="${BUILD_DIR}/ApraUtilsTests"
+TEST_EXECUTABLE="${BUILD_DIR}/ApraLinuxUtilsTests"
 
 # Default options
 VERBOSE=false
@@ -50,7 +50,7 @@ show_usage() {
     cat << EOF
 Usage: $0 [OPTIONS]
 
-Run unit tests for ApraUtils library.
+Run unit tests for ApraLinuxUtils library.
 
 OPTIONS:
     -h, --help              Show this help message

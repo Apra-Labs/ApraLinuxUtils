@@ -1,6 +1,6 @@
-# Contributing to ApraUtils
+# Contributing to ApraLinuxUtils
 
-Thank you for considering contributing to ApraUtils! We welcome contributions from the community and are grateful for your support.
+Thank you for considering contributing to ApraLinuxUtils! We welcome contributions from the community and are grateful for your support.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 ### Reporting Bugs
 
-Before creating bug reports, please check the [existing issues](https://github.com/Apra-Labs/ApraUtils/issues) to avoid duplicates.
+Before creating bug reports, please check the [existing issues](https://github.com/Apra-Labs/ApraLinuxUtils/issues) to avoid duplicates.
 
 When creating a bug report, please include:
 
@@ -71,7 +71,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 - **Use a clear and descriptive title**
 - **Provide a detailed description** of the proposed functionality
-- **Explain why this enhancement would be useful** to most ApraUtils users
+- **Explain why this enhancement would be useful** to most ApraLinuxUtils users
 - **List any similar features** in other libraries
 - **Include code examples** if applicable
 
@@ -104,11 +104,11 @@ sudo apt-get install -y clang-format clang-tidy doxygen graphviz
 
 ```bash
 # 1. Fork and clone the repository
-git clone https://github.com/YOUR_USERNAME/ApraUtils.git
-cd ApraUtils
+git clone https://github.com/YOUR_USERNAME/ApraLinuxUtils.git
+cd ApraLinuxUtils
 
 # 2. Add upstream remote
-git remote add upstream https://github.com/Apra-Labs/ApraUtils.git
+git remote add upstream https://github.com/Apra-Labs/ApraLinuxUtils.git
 
 # 3. Create a development branch
 git checkout -b feature/your-feature-name
@@ -212,7 +212,7 @@ void MyClass::myFunction(int param1, bool param2)
  *
  * Copyright (c) 2024 Apra Labs
  *
- * This file is part of ApraUtils.
+ * This file is part of ApraLinuxUtils.
  *
  * Licensed under the MIT License.
  * See LICENSE file in the project root for full license information.
@@ -440,14 +440,14 @@ bool Init(bool isRead);
 
 If you have questions about contributing:
 
-- Open a [GitHub Discussion](https://github.com/Apra-Labs/ApraUtils/discussions)
-- Check existing [Issues](https://github.com/Apra-Labs/ApraUtils/issues)
-- Review [Documentation](https://apra-labs.github.io/ApraUtils/)
+- Open a [GitHub Discussion](https://github.com/Apra-Labs/ApraLinuxUtils/discussions)
+- Check existing [Issues](https://github.com/Apra-Labs/ApraLinuxUtils/issues)
+- Review [Documentation](https://apra-labs.github.io/ApraLinuxUtils/)
 
 ## License
 
-By contributing to ApraUtils, you agree that your contributions will be licensed under the MIT License.
+By contributing to ApraLinuxUtils, you agree that your contributions will be licensed under the MIT License.
 
 ---
 
-Thank you for contributing to ApraUtils! Your efforts help make this project better for everyone.
+Thank you for contributing to ApraLinuxUtils! Your efforts help make this project better for everyone.
