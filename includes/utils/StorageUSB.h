@@ -61,6 +61,7 @@ protected:
 	bool m_skipMount;
 	STORAGE_STATE m_state;
 	std::string m_manualPath;
+	int8_t m_retryCount;
 };
 
 } /* namespace apra */

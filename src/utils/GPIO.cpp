@@ -283,7 +283,7 @@ int GPIO::ReadWithInterrupt(unsigned long uSecTout)
 	}
 	else if (rc == 0)
 	{
-		printf("timeout \n");
+		// printf("timeout \n");
 		return -1;
 	}
 
