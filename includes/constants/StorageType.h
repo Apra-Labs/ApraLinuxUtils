@@ -17,7 +17,7 @@ namespace apra
 {
 enum STORAGE_TYPE
 {
-	FAT32, NTFS, EXT4
+	FAT32, NTFS, EXT4, UNSUPPORTED
 };
 
 class STORAGE_TYPE_STRING

@@ -80,6 +80,8 @@ string storageStateToString(STORAGE_STATE state) {
     switch (state) {
         case STORAGE_INSERTED:
             return "INSERTED (not mounted)";
+        case STORAGE_INSERTED_UNSUPPORTED:
+            return "INSERTED_UNSUPPORTED (unsupported filesystem)";
         case STORAGE_MOUNTED:
             return "MOUNTED (ready for use)";
         case STORAGE_UNSAFE_EJECT:

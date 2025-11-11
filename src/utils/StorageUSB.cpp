@@ -27,8 +27,6 @@
 #include "utils/Macro.h"
 #include <algorithm>
 #include <iostream>
-#include <algorithm>
-#include <iostream>
 
 #define MAX_BUF_LEN 1024
 
@@ -179,7 +177,7 @@ string StorageUSB::mountDevice()
 						m_supportedTypes.end(),
 						type);
 		isSupportedFs = (it != m_supportedTypes.end());
-		m_retryCount--;				
+		m_retryCount--;
 	}
 	else
 	{
@@ -201,7 +199,7 @@ string StorageUSB::mountDevice()
 		m_state = STORAGE_INSERTED_UNMOUNTED;
 		m_retryCount = 0;
 	}
-	else 
+	else
 	{
 		if (m_shouldPrint)
 		{
