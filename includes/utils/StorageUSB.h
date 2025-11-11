@@ -51,6 +51,7 @@ protected:
 	bool mountWithoutPrivilege(StorageMinimalInfo storageDevice);
 	StorageMinimalInfo getHighCapacityPartition(std::string deviceNode);
 	bool isDeviceNodeConnected();
+	void checkDeviceNode();
 
 	bool m_shouldPrint;
 	std::vector<STORAGE_TYPE> m_supportedTypes;
@@ -60,6 +61,7 @@ protected:
 	bool m_skipMount;
 	STORAGE_STATE m_state;
 	std::string m_manualPath;
+	int8_t m_retryCount;
 };
 
 } /* namespace apra */

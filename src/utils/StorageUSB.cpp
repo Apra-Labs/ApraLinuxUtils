@@ -25,6 +25,8 @@
 #include "utils/Utils.h"
 #include <utils/StorageUSB.h>
 #include "utils/Macro.h"
+#include <algorithm>
+#include <iostream>
 
 #define MAX_BUF_LEN 1024
 
@@ -36,7 +38,7 @@ StorageUSB::StorageUSB(string mountPath, vector<STORAGE_TYPE> supportedTypes,
 		bool shouldPrint, bool skipMount) :
 		m_shouldPrint(shouldPrint), m_supportedTypes(supportedTypes), m_mountPoint(
 				mountPath), m_deviceNode(), m_partitionNode(), m_skipMount(
-				skipMount), m_state(STORAGE_SAFE_EJECT), m_manualPath(mountPath)
+				skipMount), m_state(STORAGE_SAFE_EJECT), m_manualPath(mountPath), m_retryCount(3)
 {
 	string error;
 	if (m_supportedTypes.empty())
@@ -147,6 +149,10 @@ string StorageUSB::insertCheck()
 			m_state = STORAGE_INSERTED;
 			m_deviceNode = devicePath;
 		}
+		if (m_shouldPrint)
+		{
+			std::cout << "Device Node is ==========>>>" << m_deviceNode << std::endl;
+		}
 		return devicePath;
 	}
 	return m_deviceNode;
@@ -156,6 +162,7 @@ string StorageUSB::mountDevice()
 {
 	string usbMountPath;
 	string devNode = insertCheck();
+	bool isSupportedFs = false;
 	if (m_skipMount)
 	{
 		StorageMinimalInfo highPartition = getHighCapacityPartition(devNode);
@@ -165,6 +172,12 @@ string StorageUSB::mountDevice()
 			m_mountPoint = usbMountPath;
 			m_partitionNode = highPartition.m_partition;
 		}
+		STORAGE_TYPE type = STORAGE_TYPE_STRING::getEnum(highPartition.m_fsType);
+		auto it = std::find(m_supportedTypes.begin(),
+						m_supportedTypes.end(),
+						type);
+		isSupportedFs = (it != m_supportedTypes.end());
+		m_retryCount--;
 	}
 	else
 	{
@@ -173,9 +186,18 @@ string StorageUSB::mountDevice()
 			usbMountPath = m_mountPoint;
 		}
 	}
-	if (!usbMountPath.empty())
+	if (!isSupportedFs)
+	{
+		m_state = STORAGE_INSERTED_UNMOUNTED;
+	}
+	else if (!usbMountPath.empty())
 	{
 		m_state = STORAGE_MOUNTED;
+	}
+	else if (!isSupportedFs && !m_retryCount)
+	{
+		m_state = STORAGE_INSERTED_UNMOUNTED;
+		m_retryCount = 0;
 	}
 	else
 	{
@@ -211,6 +233,8 @@ bool StorageUSB::isUnsafeEject()
 	if (findMountDeviceBylsblk(m_partitionNode).empty())
 	{
 		m_state = STORAGE_UNSAFE_EJECT;
+		m_deviceNode.clear();
+		m_retryCount = 3;
 		return true;
 	}
 	return false;
@@ -230,6 +254,10 @@ StorageMinimalInfo StorageUSB::getHighCapacityPartition(std::string deviceNode)
 				highCapacityPartition = partitions[count];
 			}
 		}
+	}
+	if (m_shouldPrint)
+	{
+		std::cout << "High Capacity Partition is " << highCapacityPartition.m_partition << " == " << highCapacityPartition.m_fsType << " === " << highCapacityPartition.m_size << std::endl;
 	}
 	return highCapacityPartition;
 }
@@ -496,22 +524,9 @@ bool StorageUSB::ejectDevice()
 {
 	if (unMountUSBDevice())
 	{
-		string ejectCommand = "udisksctl power-off -b " + m_deviceNode;
-		try
-		{
-			string ejectResponse = Utils::exec(ejectCommand, m_shouldPrint);
-			if (Utils::caseInsensitiveSearch(ejectResponse, "error"))
-			{
-				printf("Eject error!\n%s\n", ejectResponse.c_str());
-				return false;
-			}
-		} catch (std::runtime_error &e)
-		{
-			printf("eject error: %s\n", e.what());
-			return false;
-		}
+		string ejectCommand = "";
 		m_state = STORAGE_SAFE_EJECT;
-
+		m_retryCount = 3;
 		m_mountPoint.clear();
 		m_deviceNode.clear();
 		m_partitionNode.clear();
@@ -528,6 +543,10 @@ string StorageUSB::findMountDeviceBylsblk(string devicePartitionNode)
 				"lsblk " + devicePartitionNode + " --noheadings -o MOUNTPOINT",
 				m_shouldPrint);
 		string mountPath = Utils::trim(cmdResponse);
+		if (m_shouldPrint)
+		{
+			std::cout<<"\t mountPath ->" <<mountPath.c_str()<<std::endl;
+		}
 		if (mountPath.length()
 				&& Utils::caseInsensitiveSearch(mountPath,
 						"not a block device"))
@@ -622,6 +641,22 @@ bool StorageUSB::getStorageInfo(uint64_t &freeSpaceInMB,
 		"%" PRIu64 " >> 20;\n", totalCapacityInMB, sz);
 	}
 	return true;
+}
+
+void StorageUSB::checkDeviceNode()
+{
+	struct stat buffer;
+	string path = m_deviceNode;
+	if (path.length() && stat(path.c_str(), &buffer) == 0)
+	{
+		if (S_ISBLK(buffer.st_mode))
+		{
+			return;
+		}
+	}
+	m_state = STORAGE_SAFE_EJECT;
+	m_deviceNode.clear();
+	m_retryCount = 3;
 }
 
 }

@@ -24,6 +24,8 @@ std::string STORAGE_TYPE_STRING::getString(STORAGE_TYPE type)
 		return "ntfs";
 	case EXT4:
 		return "ext4";
+	case UNSUPPORTED:
+		return "";
 	default:
 		return "";
 	}
@@ -39,9 +41,13 @@ STORAGE_TYPE STORAGE_TYPE_STRING::getEnum(std::string typeStr)
 	{
 		return EXT4;
 	}
-	else
+	else if (typeStr == getString(FAT32))
 	{
 		return FAT32;
+	}
+	else
+	{
+		return UNSUPPORTED;
 	}
 }
 

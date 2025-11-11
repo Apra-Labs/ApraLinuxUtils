@@ -74,12 +74,9 @@ std::string Utils::exec(const std::string &cmd, bool debug)
 	{
 		throw std::runtime_error(string("popen() failed for") + cmd);
 	}
-	while (!feof(pipe.get()))
+	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
 	{
-		if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
-		{
-			result += buffer.data();
-		}
+		result += buffer.data();
 	}
 	return result;
 }
