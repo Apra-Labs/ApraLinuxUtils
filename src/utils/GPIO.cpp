@@ -1,8 +1,12 @@
 /*
  * GPIO.cpp
  *
- *  Created on: Jul 29, 2020
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <stddef.h>
@@ -21,12 +25,10 @@ using namespace apra;
 GPIO::GPIO(uint gpioNo) :
 		m_fd(-1), m_gpio(gpioNo), m_isRead(false)
 {
-	// TODO Auto-generated constructor stub
 }
 
 GPIO::~GPIO()
 {
-	// TODO Auto-generated destructor stub
 }
 
 std::string GPIO::GPIO_EDGES_STR(GPIO_EDGES edge)

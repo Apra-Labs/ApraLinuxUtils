@@ -1,8 +1,12 @@
 /*
  * Utils.cpp
  *
- *  Created on: Nov 17, 2020
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #include <stdio.h>
@@ -18,13 +22,11 @@
 using namespace apra;
 Utils::Utils()
 {
-	// TODO Auto-generated constructor stub
 
 }
 
 Utils::~Utils()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool Utils::saveRawFile(string fileName, uint8_t *data, size_t size)
@@ -144,6 +146,10 @@ bool Utils::fileExists(const std::string &path)
 bool Utils::caseInsensitiveSearch(std::string const str,
 		std::string const pattern)
 {
+	if (pattern.empty()) {
+        return true;
+    }
+
 	std::string::const_iterator it = std::search(str.begin(), str.end(),
 			pattern.begin(), pattern.end(),
 			[](unsigned char ch1, unsigned char ch2)
@@ -363,7 +369,7 @@ double Utils::convertFromUFormat(uint16_t value, uint8_t format)
 	double decVal = 0;
 	uint16_t fractionValue = 0;
 	decVal = value >> format;
-	fractionValue = value & format;
+	fractionValue = value & ((1 << format) - 1);
 	double temp = 0.00;
 	double twos = 2.00;
 	for (int32_t idx = (format - 1); idx >= 0; idx--)

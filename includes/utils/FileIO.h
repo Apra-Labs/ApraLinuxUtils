@@ -1,8 +1,12 @@
 /*
  * FileIOUtils.h
  *
- *  Created on: 01-Feb-2023
- *      Author: developer
+ * Copyright (c) 2024 Apra Labs
+ *
+ * This file is part of ApraUtils.
+ *
+ * Licensed under the MIT License.
+ * See LICENSE file in the project root for full license information.
  */
 
 #ifndef SRC_APRA_UTILS_FILEIO_H_

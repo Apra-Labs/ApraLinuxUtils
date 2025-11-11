@@ -6,6 +6,10 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
 
 project(ApraUtils)
 
+# Options for building tests and coverage
+option(BUILD_TESTS "Build unit tests" OFF)
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+
 # Platform check - this library is Linux-only
 if(NOT UNIX OR APPLE)
     message(FATAL_ERROR
@@ -34,4 +38,54 @@ SET( CORE_CODE ${CORE_CODE_FILES})
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+# Coverage flags
+if(ENABLE_COVERAGE)
+    message(STATUS "Coverage reporting enabled")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
 add_library(ApraUtils STATIC ${CORE_CODE_FILES})
+
+# Google Test setup
+if(BUILD_TESTS)
+    message(STATUS "Building unit tests")
+
+    # Download and configure Google Test
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.14.0
+    )
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    # Enable testing
+    enable_testing()
+
+    # Collect all test files
+    file(GLOB_RECURSE TEST_SOURCES tests/*.cpp)
+
+    # Create test executable
+    add_executable(ApraUtilsTests ${TEST_SOURCES})
+
+    # Link against ApraUtils library and Google Test
+    target_link_libraries(ApraUtilsTests
+        ApraUtils
+        gtest
+        gtest_main
+        pthread
+    )
+
+    # Include directories for tests
+    target_include_directories(ApraUtilsTests PRIVATE
+        ${CMAKE_SOURCE_DIR}/includes
+        ${CMAKE_SOURCE_DIR}/tests
+    )
+
+    # Add tests to CTest
+    include(GoogleTest)
+    gtest_discover_tests(ApraUtilsTests)
+endif()
