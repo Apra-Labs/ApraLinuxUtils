@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![C++14](https://img.shields.io/badge/C++-14-blue.svg)](https://isocpp.org/std/the-standard)
 [![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)](https://www.linux.org/)
-[![Code Coverage](https://img.shields.io/badge/coverage-report-green.svg)](#)
+[![codecov](https://codecov.io/gh/Apra-Labs/ApraLinuxUtils/branch/main/graph/badge.svg)](https://codecov.io/gh/Apra-Labs/ApraLinuxUtils)
 
 A comprehensive C++ utility library designed for embedded Linux systems, providing hardware interface abstractions and utilities for I2C, GPIO, PWM, USB storage, and multi-threaded applications.
 
