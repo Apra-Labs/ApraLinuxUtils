@@ -28,6 +28,7 @@ jobs:
 
       - name: Generate documentation
         run: |
+          mkdir -p docs/doxygen
           doxygen Doxyfile
 
       - name: Setup Pages
